@@ -50,8 +50,8 @@ namespace Flashcards.harris_andy
             }
             Console.Clear();
             AnsiConsole.Write(table);
-            Console.WriteLine("Press any key to continue...");
-            Console.Read();
+            // Console.WriteLine("Press any key to continue...");
+            // Console.Read();
         }
     }
 }

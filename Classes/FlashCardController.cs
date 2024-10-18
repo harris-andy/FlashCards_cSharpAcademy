@@ -82,13 +82,20 @@ namespace Flashcards.harris_andy
             if (stackData.Count == 0)
                 return CreateNewStack();
 
-            string chooseStackText = "How do you want your stack?\n1. Choose an existing stack\n2. Create new stack\n\n";
+            string chooseStackText = $"How do you want your stack?\n1. Choose an existing stack\n2. Create new stack";
             int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
 
             if (stackChoice == 1)
             {
                 _displayData.ShowStackNames(stackData);
-                return _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
+                int stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
+                var stackName = stackData
+                    .Where(s => s.Id == stackID)
+                    .Select(s => s.Name)
+                    .FirstOrDefault();
+                Console.WriteLine($"Flash card added to {stackName}.");
+                Thread.Sleep(2000);
+                return stackID;
             }
             return CreateNewStack();
         }
@@ -109,7 +116,7 @@ namespace Flashcards.harris_andy
             return stackID;
         }
 
-        public void DeleteFlashCard()
+        public void DeleteStack()
         {
 
         }
