@@ -57,5 +57,4 @@
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/obj/Debug/net8.0/Flashcards.harris-andy.pdb
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/obj/Debug/net8.0/Flashcards.harris-andy.genruntimeconfig.cache
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/obj/Debug/net8.0/ref/Flashcards.harris-andy.dll
-/Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/bin/Debug/net8.0/Docker.DotNet.dll
-/Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/andrew/Sync/Programming/C#/cSharpAcademy/Flashcards.harris-andy/obj/Debug/net8.0/Flashcards.harris-andy.sourcelink.json

@@ -56,10 +56,11 @@ namespace Flashcards.harris_andy
                 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('study_sessions') AND type in ('U'))
                 BEGIN
                     CREATE TABLE study_sessions (
-                        Id INT PRIMARY KEY INDENTITY(1,1),
+                        Id INT PRIMARY KEY IDENTITY(1,1),
                         date DATETIME,
                         score INT,
-                        FOREIGN KEY (StackId) REFERENCES stacks(Id)
+                        StackId INT,
+                        FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE
                     );
                 END;";
 
