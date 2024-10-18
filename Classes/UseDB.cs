@@ -82,5 +82,24 @@ namespace Flashcards.harris_andy
             List<Stack> stackData = connection.Query<Stack>(getStackNames).ToList();
             return stackData;
         }
+
+        public int CreateStack(string name)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { Name = name };
+            string stackQuery = @"
+                IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @Name) 
+                    BEGIN 
+                        INSERT INTO stacks (name) VALUES (@Name); 
+                    END; 
+                SELECT Id FROM stacks WHERE name = @Name;";
+            int stackId = connection.QuerySingle<int>(stackQuery, parameters);
+
+            // var stackId = connection.QuerySingle<int>(
+            // "IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @name) BEGIN INSERT INTO stacks (name) VALUES (@name); END; SELECT Id FROM stacks WHERE name = @name;",
+            // new { name = stackName });
+
+            return stackId;
+        }
     }
 }

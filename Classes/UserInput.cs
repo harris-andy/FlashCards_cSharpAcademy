@@ -8,10 +8,10 @@ namespace Flashcards.harris_andy
 {
     public class UserInput
     {
-        public int GetMenuChoice(int start, int end)
+        public int GetMenuChoice(int start, int end, string text)
         {
             int menuChoice = AnsiConsole.Prompt(
-            new TextPrompt<int>("Menu choice:")
+            new TextPrompt<int>(text)
             .Validate((n) =>
             {
                 if (start <= n && n <= end)
@@ -23,12 +23,26 @@ namespace Flashcards.harris_andy
             return menuChoice;
         }
 
-        public string GetFlashCardText(string frontOrBack)
+        public string GetText(string message)
         {
             string flashCardText = AnsiConsole.Prompt(
-                new TextPrompt<string>($"Enter text for the {frontOrBack} of the flashcard:")
+                new TextPrompt<string>(message)
             );
             return flashCardText;
         }
+
+        // public int CreateOrSelectStack()
+        // {
+        //     int choice = AnsiConsole.Prompt(
+        //         new TextPrompt<int>("How do you want your stack?\n1. Choose stack from list\n2. Create new stack")
+        //         .Validate((n) =>
+        //         {
+        //             if (n == 1 || n == 2)
+        //                 return ValidationResult.Success();
+        //             else
+        //                 return ValidationResult.Error($"[red]Must be a valid choice[/]");
+        //         }));
+        //     return choice;
+        // }
     }
 }
