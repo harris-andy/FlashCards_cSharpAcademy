@@ -72,9 +72,7 @@ namespace Flashcards.harris_andy
             string back = _userInput.GetText(messageBack);
             FlashCard flashCard = new FlashCard(front, back);
             int stackID = GetStackID();
-            // int flashCardID = _useDB.AddFlashCard(flashCard, stackID);
             _useDB.AddFlashCard(flashCard, stackID);
-            // return flashCardID;
         }
 
         public int GetStackID()
@@ -97,10 +95,23 @@ namespace Flashcards.harris_andy
 
         public int CreateNewStack()
         {
-            string message = "Enter a name for this new flash card stack:";
-            string stackName = _userInput.GetText(message);
+            string? stackName = null;
+            List<Stack> stackData = _useDB.GetAllStackNames();
+            var names = stackData.Select(n => n.Name);
+
+            while (stackName == null || names.Contains(stackName))
+            {
+                string message = "Enter a name for this new flash card stack (no repeats):";
+                stackName = _userInput.GetText(message);
+                Console.WriteLine("Like I said, no repeats...");
+            }
             int stackID = _useDB.GetOrCreateStackID(stackName);
             return stackID;
+        }
+
+        public void DeleteFlashCard()
+        {
+
         }
     }
 }

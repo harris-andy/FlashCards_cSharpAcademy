@@ -31,6 +31,13 @@ namespace Flashcards.harris_andy
             return flashCardText;
         }
 
+        // public string GetStackName(string message)
+        // {
+        //     UseDB usingDB = new UseDB();
+        //     List<Stack> stackData = usingDB.GetAllStackNames();
+        //     var names = stackData.Select(n => n.Name);
+        // }
+
         // public int CreateOrSelectStack()
         // {
         //     int choice = AnsiConsole.Prompt(
