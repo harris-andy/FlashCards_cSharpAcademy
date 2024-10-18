@@ -7,18 +7,18 @@ namespace Flashcards.harris_andy
 {
     public class FlashCardController
     {
-        private readonly UserInput _userInput;
         private readonly DisplayData _displayData;
+        private readonly UserInput _userInput;
         private readonly UseDB _useDB;
 
-        public FlashCardController(UserInput userInput, DisplayData displayData, UseDB useDB)
+        public FlashCardController(DisplayData displayData, UserInput userInput, UseDB useDB)
         {
-            _userInput = userInput;
             _displayData = displayData;
+            _userInput = userInput;
             _useDB = useDB;
         }
 
-        public void MainMenu()
+        public void ShowMainMenu()
         {
             bool closeApp = false;
             while (closeApp == false)
