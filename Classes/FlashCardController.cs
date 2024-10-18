@@ -19,6 +19,11 @@ namespace Flashcards.harris_andy
             _useDB = useDB;
         }
 
+        public void InitializeDatabase()
+        {
+            _useDB.InitializeDatabase();
+        }
+
         public void ShowMainMenu()
         {
             bool closeApp = false;
@@ -37,12 +42,13 @@ namespace Flashcards.harris_andy
                         // study session
                         break;
                     case 2:
-                        int flashCardID = GetFlashCardID();
-                        int stackID = GetStackID();
-                        _useDB.LinkFlashCardToStack(stackID, flashCardID);
+                        NewFlashCard();
+                        // int flashCardID = GetFlashCardID();
+                        // int stackID = GetStackID();
+                        // _useDB.LinkFlashCardToStack(stackID, flashCardID);
                         break;
                     case 3:
-                        // add a new stack
+                        CreateNewStack();
                         break;
                     case 4:
                         // delete a flash card
@@ -61,21 +67,23 @@ namespace Flashcards.harris_andy
             }
         }
 
-        public int GetFlashCardID()
+        public void NewFlashCard()
         {
             string messageFront = $"Enter text for the flashcard FRONT:";
             string messageBack = $"Enter text for the flashcard BACK:";
             string front = _userInput.GetText(messageFront);
             string back = _userInput.GetText(messageBack);
             FlashCard flashCard = new FlashCard(front, back);
-            int flashCardID = _useDB.AddFlashCard(flashCard);
-            return flashCardID;
+            int stackID = GetStackID();
+            // int flashCardID = _useDB.AddFlashCard(flashCard, stackID);
+            _useDB.AddFlashCard(flashCard, stackID);
+            // return flashCardID;
         }
 
         public int GetStackID()
         {
             List<Stack> stackData = _useDB.GetAllStackNames();
-            string chooseStackText = "";
+            // string chooseStackText = "";
             int stackID = 0;
 
             if (stackData.Count == 0)
@@ -84,22 +92,19 @@ namespace Flashcards.harris_andy
                 return stackID;
             }
 
-            else
-            {
-                chooseStackText = "How do you want your stack?\n1. Choose an existing stack\n2. Create new stack\n";
-                int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
+            string chooseStackText = "How do you want your stack?\n1. Choose an existing stack\n2. Create new stack\n\n";
+            int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
 
-                if (stackChoice == 1)
-                {
-                    _displayData.ShowStackNames(stackData);
-                    stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
-                    // return stackID;
-                }
-                if (stackChoice == 2)
-                {
-                    stackID = CreateNewStack();
-                    // return stackID;
-                }
+            if (stackChoice == 1)
+            {
+                _displayData.ShowStackNames(stackData);
+                stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
+                return stackID;
+            }
+            if (stackChoice == 2)
+            {
+                stackID = CreateNewStack();
+                return stackID;
             }
             return stackID;
         }
@@ -108,7 +113,7 @@ namespace Flashcards.harris_andy
         {
             string message = "Enter a name for this new flash card stack:";
             string stackName = _userInput.GetText(message);
-            int stackID = _useDB.CreateStack(stackName);
+            int stackID = _useDB.AddStack(stackName);
             return stackID;
         }
     }

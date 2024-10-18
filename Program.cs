@@ -12,6 +12,7 @@ internal class Program
         UseDB useDB = new UseDB();
         FlashCardController controller = new FlashCardController(displayData, userInput, useDB);
 
+        controller.InitializeDatabase();
         controller.ShowMainMenu();
 
     }

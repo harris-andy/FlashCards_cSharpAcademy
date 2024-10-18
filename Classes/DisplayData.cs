@@ -38,11 +38,6 @@ namespace Flashcards.harris_andy
             table.Border(TableBorder.Rounded);
             table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
             table.AddColumn(new TableColumn("[blue1]Name[/]").RightAligned());
-            // table.AddColumn(new TableColumn("[green1]Start Day[/]").RightAligned());
-            // table.AddColumn(new TableColumn("[green1]Start Time[/]").RightAligned());
-            // table.AddColumn(new TableColumn("[red1]End Day[/]").RightAligned());
-            // table.AddColumn(new TableColumn("[red1]End Time[/]").RightAligned());
-            // table.AddColumn(new TableColumn("[yellow1]Duration (min)[/]").LeftAligned());
 
             foreach (Stack stack in stackData)
             {
@@ -50,11 +45,6 @@ namespace Flashcards.harris_andy
                 table.AddRow(
                     $"[{color}]{stack.Id}[/]",
                     $"[{color}]{stack.Name ?? "N/A"}[/]"
-                // $"[{color}]{session.StartDateTime.ToShortDateString()}[/]",
-                // $"[{color}]{session.StartDateTime.ToShortTimeString()}[/]",
-                // $"[{color}]{session.EndDateTime.ToShortDateString()}[/]",
-                // $"[{color}]{session.EndDateTime.ToShortTimeString()}[/]",
-                // $"[{color}]{session.Duration} min[/]"
                 );
                 isAlternateRow = !isAlternateRow;
             }
