@@ -36,7 +36,7 @@ namespace Flashcards.harris_andy
                         // study session
                         break;
                     case 2:
-                        // add a flash card
+                        AddFlashCard();
                         break;
                     case 3:
                         // add a new stack
@@ -64,6 +64,13 @@ namespace Flashcards.harris_andy
             string back = _userInput.GetFlashCardText("back");
             FlashCard flashCard = new FlashCard(front, back);
             _useDB.AddFlashCard(flashCard);
+        }
+
+        public void GetStackName()
+        {
+            List<Stack> stackData = _useDB.GetAllStackNames();
+            _displayData.ShowStackNames(stackData);
+
         }
     }
 }

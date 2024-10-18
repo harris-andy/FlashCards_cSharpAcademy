@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Spectre.Console;
 
 namespace Flashcards.harris_andy
 {
@@ -26,6 +27,41 @@ namespace Flashcards.harris_andy
                 // "\tType 9 to Set a Coding Goal\n" +
                 // "\tType 10 to Get Coding Goal Progress\n" +
                 "--------------------------------------------------\n");
+        }
+
+        public void ShowStackNames(List<Stack> stackData)
+        {
+            var table = new Table();
+            bool isAlternateRow = false;
+
+            table.BorderColor(Color.DarkSlateGray1);
+            table.Border(TableBorder.Rounded);
+            table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
+            table.AddColumn(new TableColumn("[blue1]Name[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[green1]Start Day[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[green1]Start Time[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[red1]End Day[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[red1]End Time[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[yellow1]Duration (min)[/]").LeftAligned());
+
+            foreach (Stack stack in stackData)
+            {
+                var color = isAlternateRow ? "grey" : "blue";
+                table.AddRow(
+                    $"[{color}]{stack.Id}[/]",
+                    $"[{color}]{stack.Name ?? "N/A"}[/]"
+                // $"[{color}]{session.StartDateTime.ToShortDateString()}[/]",
+                // $"[{color}]{session.StartDateTime.ToShortTimeString()}[/]",
+                // $"[{color}]{session.EndDateTime.ToShortDateString()}[/]",
+                // $"[{color}]{session.EndDateTime.ToShortTimeString()}[/]",
+                // $"[{color}]{session.Duration} min[/]"
+                );
+                isAlternateRow = !isAlternateRow;
+            }
+            Console.Clear();
+            AnsiConsole.Write(table);
+            Console.WriteLine("Press any key to continue...");
+            Console.Read();
         }
     }
 }

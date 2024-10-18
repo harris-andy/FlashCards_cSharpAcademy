@@ -74,5 +74,13 @@ namespace Flashcards.harris_andy
             var insertFlashCard = @"INSERT INTO flashcards (front, back) VALUES (@Front, @Back);";
             connection.Execute(insertFlashCard, parameters);
         }
+
+        public List<Stack> GetAllStackNames()
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            string getStackNames = @"SELECT Id, name FROM stacks;";
+            List<Stack> stackData = connection.Query<Stack>(getStackNames).ToList();
+            return stackData;
+        }
     }
 }
