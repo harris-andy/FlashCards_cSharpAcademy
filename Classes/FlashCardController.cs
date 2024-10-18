@@ -57,5 +57,13 @@ namespace Flashcards.harris_andy
                 }
             }
         }
+
+        public void AddFlashCard()
+        {
+            string front = _userInput.GetFlashCardText("front");
+            string back = _userInput.GetFlashCardText("back");
+            FlashCard flashCard = new FlashCard(front, back);
+            _useDB.AddFlashCard(flashCard);
+        }
     }
 }

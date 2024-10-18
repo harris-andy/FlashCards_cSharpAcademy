@@ -22,5 +22,13 @@ namespace Flashcards.harris_andy
             }));
             return menuChoice;
         }
+
+        public string GetFlashCardText(string frontOrBack)
+        {
+            string flashCardText = AnsiConsole.Prompt(
+                new TextPrompt<string>($"Enter text for the {frontOrBack} of the flashcard:")
+            );
+            return flashCardText;
+        }
     }
 }

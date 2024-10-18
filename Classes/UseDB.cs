@@ -9,7 +9,7 @@ namespace Flashcards.harris_andy
 {
     public class UseDB
     {
-        public static void InitializeDatabase()
+        public void InitializeDatabase()
         {
             string connectionStringMaster = "Server=localhost,1433;Database=master;User Id=SA;Password=SuperStrongSexyPassword123;TrustServerCertificate=True;";
 
@@ -67,12 +67,12 @@ namespace Flashcards.harris_andy
             connection.Execute(createTables);
         }
 
-        public static void AddFlashCard()
+        public void AddFlashCard(FlashCard flashCard)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
-            // string front = "What is the capital of France?";
-            // string back = "Paris";
-            // var addFlashCard = @"INSERT INTO flashcards (front, back) VALUES (@Front, @Back);";
+            var parameters = new { Front = flashCard.Front, Back = flashCard.Back };
+            var insertFlashCard = @"INSERT INTO flashcards (front, back) VALUES (@Front, @Back);";
+            connection.Execute(insertFlashCard, parameters);
         }
     }
 }
