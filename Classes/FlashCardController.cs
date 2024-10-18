@@ -43,9 +43,6 @@ namespace Flashcards.harris_andy
                         break;
                     case 2:
                         NewFlashCard();
-                        // int flashCardID = GetFlashCardID();
-                        // int stackID = GetStackID();
-                        // _useDB.LinkFlashCardToStack(stackID, flashCardID);
                         break;
                     case 3:
                         CreateNewStack();
@@ -83,14 +80,9 @@ namespace Flashcards.harris_andy
         public int GetStackID()
         {
             List<Stack> stackData = _useDB.GetAllStackNames();
-            // string chooseStackText = "";
-            int stackID = 0;
 
             if (stackData.Count == 0)
-            {
-                stackID = CreateNewStack();
-                return stackID;
-            }
+                return CreateNewStack();
 
             string chooseStackText = "How do you want your stack?\n1. Choose an existing stack\n2. Create new stack\n\n";
             int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
@@ -98,22 +90,16 @@ namespace Flashcards.harris_andy
             if (stackChoice == 1)
             {
                 _displayData.ShowStackNames(stackData);
-                stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
-                return stackID;
+                return _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
             }
-            if (stackChoice == 2)
-            {
-                stackID = CreateNewStack();
-                return stackID;
-            }
-            return stackID;
+            return CreateNewStack();
         }
 
         public int CreateNewStack()
         {
             string message = "Enter a name for this new flash card stack:";
             string stackName = _userInput.GetText(message);
-            int stackID = _useDB.AddStack(stackName);
+            int stackID = _useDB.GetOrCreateStackID(stackName);
             return stackID;
         }
     }

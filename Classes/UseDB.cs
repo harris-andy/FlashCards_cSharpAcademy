@@ -79,7 +79,7 @@ namespace Flashcards.harris_andy
             return stackData;
         }
 
-        public int AddStack(string name)
+        public int GetOrCreateStackID(string name)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { Name = name };
