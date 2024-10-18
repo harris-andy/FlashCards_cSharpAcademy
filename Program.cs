@@ -6,11 +6,13 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        // UseDB.InitializeDatabase();
+
         UserInput userInput = new UserInput();
         DisplayData displayData = new DisplayData();
         UseDB useDB = new UseDB();
         FlashCardController controller = new FlashCardController(displayData, userInput, useDB);
+
+
 
         controller.ShowMainMenu();
 

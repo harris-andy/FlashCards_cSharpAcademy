@@ -29,8 +29,8 @@ namespace Flashcards.harris_andy
                 BEGIN
                     CREATE TABLE flashcards (
                         Id INT PRIMARY KEY IDENTITY(1,1),
-                        front TEXT,
-                        back TEXT
+                        front NVARCHAR(255),
+                        back NVARCHAR(255)
                     );
                 END;
 
@@ -38,7 +38,7 @@ namespace Flashcards.harris_andy
                 BEGIN
                     CREATE TABLE stacks(
                         Id INT PRIMARY KEY IDENTITY(1,1),
-                        name TEXT NOT NULL
+                        name NVARCHAR(255) NOT NULL
                     );
                 END;
 
@@ -49,7 +49,7 @@ namespace Flashcards.harris_andy
                         FlashcardId INT,
                         PRIMARY KEY (StackId, FlashcardId),
                         FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE,
-                        FOREIGN KEY (FlashcardId) REFERENCES flashcards(Id)
+                        FOREIGN KEY (FlashcardId) REFERENCES flashcards(Id) ON DELETE CASCADE
                     );
                 END;
                 
@@ -67,12 +67,15 @@ namespace Flashcards.harris_andy
             connection.Execute(createTables);
         }
 
-        public void AddFlashCard(FlashCard flashCard)
+        public int AddFlashCard(FlashCard flashCard)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { Front = flashCard.Front, Back = flashCard.Back };
-            var insertFlashCard = @"INSERT INTO flashcards (front, back) VALUES (@Front, @Back);";
-            connection.Execute(insertFlashCard, parameters);
+            string sql = "INSERT INTO flashcards (front, back) OUTPUT INSERTED.Id VALUES (@Front, @Back);";
+            int flashCardID = connection.QuerySingle<int>(sql, parameters);
+            // Console.WriteLine($"Flash card ID: {flashCardID}");
+            // Thread.Sleep(5000);
+            return flashCardID;
         }
 
         public List<Stack> GetAllStackNames()
@@ -100,6 +103,14 @@ namespace Flashcards.harris_andy
             // new { name = stackName });
 
             return stackId;
+        }
+
+        public void LinkFlashCardToStack(int stackID, int flashCardID)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { stackID = stackID, flashCardID = flashCardID };
+            string sql = "INSERT INTO stack_flashcards (StackId, FlashcardId) VALUES (@stackID, @flashcardID);";
+            connection.Execute(sql, parameters);
         }
     }
 }
