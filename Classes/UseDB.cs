@@ -31,6 +31,8 @@ namespace Flashcards.harris_andy
                         Id INT PRIMARY KEY IDENTITY(1,1),
                         front NVARCHAR(255),
                         back NVARCHAR(255)
+                        StackId INT,
+                        FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE
                     );
                 END;
 
@@ -39,17 +41,6 @@ namespace Flashcards.harris_andy
                     CREATE TABLE stacks(
                         Id INT PRIMARY KEY IDENTITY(1,1),
                         name NVARCHAR(255) NOT NULL
-                    );
-                END;
-
-                IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('stack_flashcards') AND type in ('U'))
-                BEGIN
-                    CREATE TABLE stack_flashcards (
-                        StackId INT,
-                        FlashcardId INT,
-                        PRIMARY KEY (StackId, FlashcardId),
-                        FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE,
-                        FOREIGN KEY (FlashcardId) REFERENCES flashcards(Id) ON DELETE CASCADE
                     );
                 END;
                 
