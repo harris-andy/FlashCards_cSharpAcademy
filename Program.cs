@@ -12,9 +12,8 @@ Requirements
     The project should contain a call to the study table so the users can see all their study sessions. This table receives insert calls upon each study session, but there shouldn't be update and delete calls to it.
 
 BUGS
-    1. CreateNewStack always prints CW line
-    2. FlashCard IDs are fucked up (1002, 1003)
-    3. 
+    - CreateNewStack always prints CW line
+    - 
 */
 
 using Flashcards.harris_andy;

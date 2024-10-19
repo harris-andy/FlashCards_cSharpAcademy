@@ -47,6 +47,13 @@ namespace Flashcards.harris_andy
 
         public int VerifyStackID(List<Stack> stackData)
         {
+            if (stackData.Count == 0)
+            {
+                Console.WriteLine("No stacks found!");
+                Thread.Sleep(2000);
+                // NewFlashCard();
+                return 0;
+            }
             var maxID = stackData
                 .OrderByDescending(s => s.Id)
                 .FirstOrDefault()?.Id ?? 0;
