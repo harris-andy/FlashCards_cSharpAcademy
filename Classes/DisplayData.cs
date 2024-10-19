@@ -53,5 +53,15 @@ namespace Flashcards.harris_andy
             // Console.WriteLine("Press any key to continue...");
             // Console.Read();
         }
+
+        public void ShowStackMessage(List<Stack> stackData, int stackID, string message)
+        {
+            var stackName = stackData
+                    .Where(s => s.Id == stackID)
+                    .Select(s => s.Name)
+                    .FirstOrDefault();
+            Console.WriteLine($"{message} {stackName}.");
+            Thread.Sleep(2000);
+        }
     }
 }

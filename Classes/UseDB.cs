@@ -79,7 +79,7 @@ namespace Flashcards.harris_andy
             return stackData;
         }
 
-        public int GetOrCreateStackID(string name)
+        public int CreateStackID(string name)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { Name = name };
@@ -99,12 +99,12 @@ namespace Flashcards.harris_andy
             return stackId;
         }
 
-        // public void LinkFlashCardToStack(int stackID, int flashCardID)
-        // {
-        //     using var connection = new SqlConnection(AppConfig.ConnectionString);
-        //     var parameters = new { stackID = stackID, flashCardID = flashCardID };
-        //     string sql = "INSERT INTO stack_flashcards (StackId, FlashcardId) VALUES (@stackID, @flashcardID);";
-        //     connection.Execute(sql, parameters);
-        // }
+        public void DeleteStack(int id)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { ID = id };
+            string sql = @"DELETE FROM stacks WHERE stacks.Id = @ID;";
+            connection.Execute(sql, parameters);
+        }
     }
 }

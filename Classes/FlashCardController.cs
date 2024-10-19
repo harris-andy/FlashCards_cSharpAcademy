@@ -51,7 +51,7 @@ namespace Flashcards.harris_andy
                         // delete a flash card
                         break;
                     case 5:
-                        // delete a stack
+                        DeleteStack();
                         break;
                     case 6:
                         // view study session scores
@@ -71,30 +71,39 @@ namespace Flashcards.harris_andy
             string front = _userInput.GetText(messageFront);
             string back = _userInput.GetText(messageBack);
             FlashCard flashCard = new FlashCard(front, back);
-            int stackID = GetStackID();
+            int stackID = AddToStack();
             _useDB.AddFlashCard(flashCard, stackID);
         }
 
         public int GetStackID()
         {
             List<Stack> stackData = _useDB.GetAllStackNames();
+            string chooseStackText = $"Enter ID of stack you want to delete:";
+            return _userInput.GetMenuChoice(1, stackData.Count, chooseStackText);
+        }
+
+        public int AddToStack()
+        {
+            List<Stack> stackData = _useDB.GetAllStackNames();
 
             if (stackData.Count == 0)
                 return CreateNewStack();
 
-            string chooseStackText = $"How do you want your stack?\n1. Choose an existing stack\n2. Create new stack";
+            string chooseStackText = $"\nHow do you want your stack?\n1. Choose an existing stack\n2. Create new stack";
             int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
 
             if (stackChoice == 1)
             {
                 _displayData.ShowStackNames(stackData);
+                string message = $"Flash card added to ";
                 int stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
-                var stackName = stackData
-                    .Where(s => s.Id == stackID)
-                    .Select(s => s.Name)
-                    .FirstOrDefault();
-                Console.WriteLine($"Flash card added to {stackName}.");
-                Thread.Sleep(2000);
+                _displayData.ShowStackMessage(stackData, stackID, message);
+                // var stackName = stackData
+                //     .Where(s => s.Id == stackID)
+                //     .Select(s => s.Name)
+                //     .FirstOrDefault();
+                // Console.WriteLine($"Flash card added to {stackName}.");
+                // Thread.Sleep(2000);
                 return stackID;
             }
             return CreateNewStack();
@@ -112,13 +121,18 @@ namespace Flashcards.harris_andy
                 stackName = _userInput.GetText(message);
                 Console.WriteLine("Like I said, no repeats...");
             }
-            int stackID = _useDB.GetOrCreateStackID(stackName);
+            int stackID = _useDB.CreateStackID(stackName);
             return stackID;
         }
 
         public void DeleteStack()
         {
-
+            List<Stack> stackData = _useDB.GetAllStackNames();
+            _displayData.ShowStackNames(stackData);
+            int stackID = GetStackID();
+            string message = $"Deleted stack";
+            _displayData.ShowStackMessage(stackData, stackID, message);
+            _useDB.DeleteStack(stackID);
         }
     }
 }
