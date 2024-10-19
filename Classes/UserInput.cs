@@ -31,6 +31,19 @@ namespace Flashcards.harris_andy
             return flashCardText;
         }
 
+        public string ChooseNewOrOldStack()
+        {
+            string answer = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Add to an [green]existing stack[/] or [yellow]create a new stack[/]?")
+                    .PageSize(2)
+                    // .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
+                    .AddChoices(new[] {
+                        "Choose existing", "Create new"
+                    }));
+            return answer.ToLower();
+        }
+
         // public string GetStackName(string message)
         // {
         //     UseDB usingDB = new UseDB();

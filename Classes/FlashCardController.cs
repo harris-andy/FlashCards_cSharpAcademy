@@ -66,12 +66,19 @@ namespace Flashcards.harris_andy
 
         public void NewFlashCard()
         {
+            string chooseStackText = _userInput.ChooseNewOrOldStack();
+            int stackID;
+            if (chooseStackText == "create new")
+                stackID = CreateNewStack();
+            if (chooseStackText == "choose existing")
+                stackID = GetStackID();
+
             string messageFront = $"Enter text for the flashcard FRONT:";
             string messageBack = $"Enter text for the flashcard BACK:";
             string front = _userInput.GetText(messageFront);
             string back = _userInput.GetText(messageBack);
             FlashCard flashCard = new FlashCard(front, back);
-            int stackID = AddToStack();
+            stackID = AddToStack();
             _useDB.AddFlashCard(flashCard, stackID);
         }
 
