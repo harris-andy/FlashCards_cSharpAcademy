@@ -66,7 +66,8 @@ namespace Flashcards.harris_andy
 
         public void NewFlashCard()
         {
-            int stackID = ChooseStack();
+            string chooseStackText = _userInput.ChooseNewOrOldStack();
+            int stackID = ChooseStack(chooseStackText);
             bool closeApp = false;
 
             while (closeApp == false)
@@ -89,14 +90,14 @@ namespace Flashcards.harris_andy
             }
         }
 
-        public int ChooseStack()
+        public int ChooseStack(string option)
         {
             Console.Clear();
-            string chooseStackText = _userInput.ChooseNewOrOldStack();
+            // string chooseStackText = _userInput.ChooseNewOrOldStack();
             int stackID = -1;
-            if (chooseStackText == "create new")
+            if (option == "create new")
                 stackID = CreateNewStack();
-            if (chooseStackText == "choose existing")
+            if (option == "choose existing")
             {
                 List<Stack> stackData = _useDB.GetAllStackNames();
                 if (stackData.Count == 0)
@@ -108,7 +109,7 @@ namespace Flashcards.harris_andy
                 _displayData.ShowStackNames(stackData);
                 stackID = _userInput.VerifyStackID(stackData);
             }
-            if (chooseStackText == "main menu")
+            if (option == "main menu")
                 ShowMainMenu();
             return stackID;
         }
@@ -142,6 +143,7 @@ namespace Flashcards.harris_andy
 
         public void StudySession()
         {
+            int stackID = ChooseStack("choose existing");
 
         }
     }

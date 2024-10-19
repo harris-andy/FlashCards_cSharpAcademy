@@ -79,6 +79,14 @@ namespace Flashcards.harris_andy
             return stackData;
         }
 
+        public void GetFlashCardDTO(int stackID)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { ID = stackID };
+            string sql = @"SELECT front, back FROM flashcards WHERE stackID = @ID";
+            List<FlashCardDTO> flashCards = connection.Query<FlashCardDTO>(sql, parameters).ToList();
+        }
+
         public int CreateStackID(string name)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
@@ -99,12 +107,14 @@ namespace Flashcards.harris_andy
             return stackId;
         }
 
-        public void DeleteStack(int id)
+        public void DeleteStack(int stackID)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
-            var parameters = new { ID = id };
+            var parameters = new { ID = stackID };
             string sql = @"DELETE FROM stacks WHERE stacks.Id = @ID;";
             connection.Execute(sql, parameters);
         }
+
+
     }
 }
