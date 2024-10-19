@@ -49,7 +49,7 @@ namespace Flashcards.harris_andy
                     CREATE TABLE study_sessions (
                         Id INT PRIMARY KEY IDENTITY(1,1),
                         date DATETIME,
-                        score INT,
+                        score FLOAT,
                         StackId INT,
                         FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE
                     );

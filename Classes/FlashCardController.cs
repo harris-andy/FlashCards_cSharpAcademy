@@ -66,26 +66,8 @@ namespace Flashcards.harris_andy
 
         public void NewFlashCard()
         {
-            // Console.Clear();
-            // string chooseStackText = _userInput.ChooseNewOrOldStack();
             int stackID = ChooseStack();
             bool closeApp = false;
-            // if (chooseStackText == "create new")
-            //     stackID = CreateNewStack();
-            // if (chooseStackText == "choose existing")
-            // {
-            //     List<Stack> stackData = _useDB.GetAllStackNames();
-            //     if (stackData.Count == 0)
-            //     {
-            //         Console.WriteLine("No stacks found!");
-            //         Thread.Sleep(2000);
-            //         NewFlashCard();
-            //     }
-            //     _displayData.ShowStackNames(stackData);
-            //     stackID = _userInput.VerifyStackID(stackData);
-            // }
-            // if (chooseStackText == "main menu")
-            //     ShowMainMenu();
 
             while (closeApp == false)
             {
@@ -156,6 +138,11 @@ namespace Flashcards.harris_andy
             string message = $"Deleted stack";
             _displayData.ShowStackMessage(stackData, stackID, message);
             _useDB.DeleteStack(stackID);
+        }
+
+        public void StudySession()
+        {
+
         }
     }
 }
