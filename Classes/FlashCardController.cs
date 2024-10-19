@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 namespace Flashcards.harris_andy
@@ -39,7 +40,7 @@ namespace Flashcards.harris_andy
                         Environment.Exit(0);
                         break;
                     case 1:
-                        // study session
+                        StudySession();
                         break;
                     case 2:
                         NewFlashCard();
@@ -144,7 +145,13 @@ namespace Flashcards.harris_andy
         public void StudySession()
         {
             int stackID = ChooseStack("choose existing");
-
+            List<FlashCardDTO> flashCards = _useDB.GetFlashCardDTO(stackID);
+            foreach (FlashCardDTO card in flashCards)
+            {
+                Console.WriteLine($"Front: {card.Front}");
+                Console.WriteLine($"Back: {card.Back}");
+                Thread.Sleep(1500);
+            }
         }
     }
 }

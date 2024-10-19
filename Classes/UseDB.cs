@@ -75,16 +75,16 @@ namespace Flashcards.harris_andy
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             string getStackNames = @"SELECT Id, name FROM stacks;";
-            List<Stack> stackData = connection.Query<Stack>(getStackNames).ToList();
-            return stackData;
+            return connection.Query<Stack>(getStackNames).ToList();
+            // return stackData;
         }
 
-        public void GetFlashCardDTO(int stackID)
+        public List<FlashCardDTO> GetFlashCardDTO(int stackID)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { ID = stackID };
             string sql = @"SELECT front, back FROM flashcards WHERE stackID = @ID";
-            List<FlashCardDTO> flashCards = connection.Query<FlashCardDTO>(sql, parameters).ToList();
+            return connection.Query<FlashCardDTO>(sql, parameters).ToList();
         }
 
         public int CreateStackID(string name)
