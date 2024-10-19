@@ -33,15 +33,37 @@ namespace Flashcards.harris_andy
 
         public string ChooseNewOrOldStack()
         {
+            // Console.Clear();
             string answer = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Add to an [green]existing stack[/] or [yellow]create a new stack[/]?")
-                    .PageSize(2)
+                    .PageSize(3)
                     // .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
                     .AddChoices(new[] {
-                        "Choose existing", "Create new"
+                        "Choose existing", "Create new", "Main Menu"
                     }));
             return answer.ToLower();
+        }
+
+        public int VerifyStackID(List<Stack> stackData)
+        {
+            var maxID = stackData
+                .OrderByDescending(s => s.Id)
+                .FirstOrDefault()?.Id ?? 0;
+            var validIDs = stackData
+                .Select(s => s.Id)
+                .ToList();
+            var verifiedStackID = AnsiConsole.Prompt(
+            new TextPrompt<int>($"Enter stack ID to continue::")
+            .Validate((n) =>
+            {
+                if (validIDs.Contains(n))
+                    return ValidationResult.Success();
+
+                else
+                    return ValidationResult.Error($"[red]Must be a valid ID[/]");
+            }));
+            return verifiedStackID;
         }
 
         // public string GetStackName(string message)

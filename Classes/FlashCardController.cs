@@ -66,55 +66,78 @@ namespace Flashcards.harris_andy
 
         public void NewFlashCard()
         {
+            Console.Clear();
             string chooseStackText = _userInput.ChooseNewOrOldStack();
-            int stackID;
+            int stackID = 0;
+            bool closeApp = false;
             if (chooseStackText == "create new")
                 stackID = CreateNewStack();
             if (chooseStackText == "choose existing")
                 stackID = GetStackID();
+            if (chooseStackText == "main menu")
+                ShowMainMenu();
 
-            string messageFront = $"Enter text for the flashcard FRONT:";
-            string messageBack = $"Enter text for the flashcard BACK:";
-            string front = _userInput.GetText(messageFront);
-            string back = _userInput.GetText(messageBack);
-            FlashCard flashCard = new FlashCard(front, back);
-            stackID = AddToStack();
-            _useDB.AddFlashCard(flashCard, stackID);
+            while (closeApp == false)
+            {
+                Console.Clear();
+                string messageFront = $"Enter text for the flashcard FRONT:";
+                string messageBack = $"Enter text for the flashcard BACK:";
+                string front = _userInput.GetText(messageFront);
+                string back = _userInput.GetText(messageBack);
+                FlashCard flashCard = new FlashCard(front, back, stackID);
+                // stackID = AddToStack();
+                _useDB.AddFlashCard(flashCard, stackID);
+
+                Console.WriteLine("Press 0 to return to Main Menu or Enter to add more flash cards.");
+                ConsoleKeyInfo button = Console.ReadKey(true);
+                if (button.Key == ConsoleKey.NumPad0 || button.Key == ConsoleKey.D0)
+                {
+                    ShowMainMenu();
+                    break;
+                }
+            }
         }
 
         public int GetStackID()
         {
             List<Stack> stackData = _useDB.GetAllStackNames();
-            string chooseStackText = $"Enter ID of stack you want to delete:";
-            return _userInput.GetMenuChoice(1, stackData.Count, chooseStackText);
-        }
-
-        public int AddToStack()
-        {
-            List<Stack> stackData = _useDB.GetAllStackNames();
-
             if (stackData.Count == 0)
-                return CreateNewStack();
-
-            string chooseStackText = $"\nHow do you want your stack?\n1. Choose an existing stack\n2. Create new stack";
-            int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
-
-            if (stackChoice == 1)
             {
-                _displayData.ShowStackNames(stackData);
-                string message = $"Flash card added to ";
-                int stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
-                _displayData.ShowStackMessage(stackData, stackID, message);
-                // var stackName = stackData
-                //     .Where(s => s.Id == stackID)
-                //     .Select(s => s.Name)
-                //     .FirstOrDefault();
-                // Console.WriteLine($"Flash card added to {stackName}.");
-                // Thread.Sleep(2000);
-                return stackID;
+                Console.WriteLine("No stacks found!");
+                Thread.Sleep(2000);
+                NewFlashCard();
+                return 0;
             }
-            return CreateNewStack();
+            _displayData.ShowStackNames(stackData);
+            return _userInput.VerifyStackID(stackData);
         }
+
+        // public int AddToStack()
+        // {
+        //     List<Stack> stackData = _useDB.GetAllStackNames();
+
+        //     if (stackData.Count == 0)
+        //         return CreateNewStack();
+
+        //     string chooseStackText = $"\nHow do you want your stack?\n1. Choose an existing stack\n2. Create new stack";
+        //     int stackChoice = _userInput.GetMenuChoice(1, 2, chooseStackText);
+
+        //     if (stackChoice == 1)
+        //     {
+        //         _displayData.ShowStackNames(stackData);
+        //         string message = $"Flash card added to ";
+        //         int stackID = _userInput.GetMenuChoice(1, stackData.Count, "Choose a stack ID from above to add your flash card to:");
+        //         _displayData.ShowStackMessage(stackData, stackID, message);
+        //         // var stackName = stackData
+        //         //     .Where(s => s.Id == stackID)
+        //         //     .Select(s => s.Name)
+        //         //     .FirstOrDefault();
+        //         // Console.WriteLine($"Flash card added to {stackName}.");
+        //         // Thread.Sleep(2000);
+        //         return stackID;
+        //     }
+        //     return CreateNewStack();
+        // }
 
         public int CreateNewStack()
         {
@@ -122,6 +145,7 @@ namespace Flashcards.harris_andy
             List<Stack> stackData = _useDB.GetAllStackNames();
             var names = stackData.Select(n => n.Name);
 
+            // FIX THIS - SHOULDN'T ALWAYS SHOW THAT CW
             while (stackName == null || names.Contains(stackName))
             {
                 string message = "Enter a name for this new flash card stack (no repeats):";
