@@ -75,8 +75,8 @@ namespace Flashcards.harris_andy
         public void AddStudySession(StudySessionRecord record)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
-            var parameters = new { Date = record.Date, Score = record.Score, StackID = record.StackID };
-            string sql = "INSERT INTO study_sessions (date, score, stackID) VALUES (@Date, @Score, @StackID)";
+            var parameters = new { Date = record.Date, Score = record.Score, Questions = record.Questions, StackID = record.StackID };
+            string sql = "INSERT INTO study_sessions (date, score, questions, stackID) VALUES (@Date, @Score, @Questions, @StackID)";
             connection.Execute(sql, parameters);
         }
 

@@ -80,9 +80,22 @@ namespace Flashcards.harris_andy
             AnsiConsole.Write(panel);
         }
 
-        public void DisplayScore()
+        public void DisplayScore(int score, int questions)
         {
-
+            Console.Clear();
+            string text = $"You got {score}/{questions} correct.";
+            Panel panel = new Panel(text);
+            panel.Header = new PanelHeader($"[yellow]Score[/]");
+            panel.HeaderAlignment(Justify.Center);
+            // panel.Border = BoxBorder.Ascii;
+            // panel.Border = BoxBorder.Square;
+            // panel.Border = BoxBorder.Double;
+            // panel.Border = BoxBorder.Rounded;
+            panel.Border = BoxBorder.Heavy;
+            panel.BorderColor(Color.Yellow);
+            // panel.Border = BoxBorder.None;
+            panel.Padding = new Padding(10, 5, 10, 5);
+            AnsiConsole.Write(panel);
         }
     }
 }

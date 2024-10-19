@@ -157,6 +157,8 @@ namespace Flashcards.harris_andy
                 _displayData.DisplayCard(card.Back);
                 score += _userInput.GetQuestionPoints();
             }
+            _displayData.DisplayScore(score, questions);
+            _userInput.WaitToContinue();
             StudySessionRecord record = new StudySessionRecord(date, score, questions, stackID);
             _useDB.AddStudySession(record);
         }
