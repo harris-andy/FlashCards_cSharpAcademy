@@ -128,7 +128,7 @@ namespace Flashcards.harris_andy
                 stackName = _userInput.GetText(message);
                 Console.WriteLine("Like I said, no repeats...");
             }
-            int stackID = _useDB.CreateStackID(stackName);
+            int stackID = _useDB.AddStack(stackName);
             return stackID;
         }
 
@@ -144,22 +144,21 @@ namespace Flashcards.harris_andy
 
         public void StudySession()
         {
-            float score = 0;
             int stackID = ChooseStack("choose existing");
             List<FlashCardDTO> flashCards = _useDB.GetFlashCardDTO(stackID);
+            DateTime now = DateTime.Now;
+            DateTime date = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+            int score = 0;
+            int questions = flashCards.Count();
             foreach (FlashCardDTO card in flashCards)
             {
-                Console.Clear();
                 _displayData.DisplayCard(card.Front);
-                Console.WriteLine($"Press enter to flip card");
-                Console.Read();
-                Console.Clear();
+                _userInput.WaitToContinue();
                 _displayData.DisplayCard(card.Back);
                 score += _userInput.GetQuestionPoints();
-                Console.WriteLine($"Score: {score}");
-                Console.WriteLine($"Press enter to continue");
-                Console.Read();
             }
+            StudySessionRecord record = new StudySessionRecord(date, score, questions, stackID);
+            _useDB.AddStudySession(record);
         }
     }
 }

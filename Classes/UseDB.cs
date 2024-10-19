@@ -49,8 +49,9 @@ namespace Flashcards.harris_andy
                     CREATE TABLE study_sessions (
                         Id INT PRIMARY KEY IDENTITY(1,1),
                         date DATETIME,
-                        score FLOAT,
-                        StackId INT,
+                        score INT,
+                        questions INT,
+                        stackId INT,
                         FOREIGN KEY (StackId) REFERENCES stacks(Id) ON DELETE CASCADE
                     );
                 END;";
@@ -71,6 +72,14 @@ namespace Flashcards.harris_andy
             // return flashCardID;
         }
 
+        public void AddStudySession(StudySessionRecord record)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { Date = record.Date, Score = record.Score, StackID = record.StackID };
+            string sql = "INSERT INTO study_sessions (date, score, stackID) VALUES (@Date, @Score, @StackID)";
+            connection.Execute(sql, parameters);
+        }
+
         public List<Stack> GetAllStackNames()
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
@@ -87,7 +96,7 @@ namespace Flashcards.harris_andy
             return connection.Query<FlashCardDTO>(sql, parameters).ToList();
         }
 
-        public int CreateStackID(string name)
+        public int AddStack(string name)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { Name = name };

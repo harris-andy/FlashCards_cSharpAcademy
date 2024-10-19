@@ -79,5 +79,10 @@ namespace Flashcards.harris_andy
             panel.Padding = new Padding(10, 5, 10, 5);
             AnsiConsole.Write(panel);
         }
+
+        public void DisplayScore()
+        {
+
+        }
     }
 }

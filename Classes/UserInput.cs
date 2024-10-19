@@ -88,6 +88,12 @@ namespace Flashcards.harris_andy
             return verifiedStackID;
         }
 
+        public void WaitToContinue()
+        {
+            Console.WriteLine($"Press enter to continue...");
+            Console.Read();
+        }
+
         // public string GetStackName(string message)
         // {
         //     UseDB usingDB = new UseDB();
