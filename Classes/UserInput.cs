@@ -45,6 +45,21 @@ namespace Flashcards.harris_andy
             return answer.ToLower();
         }
 
+        public int GetQuestionPoints()
+        {
+            string answer = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Was your answer [green]correct[/] or [red]wrong[/]?")
+                    .PageSize(3)
+                    .AddChoices(new[] {
+                        "Correct", "Wrong"
+                    }));
+            if (answer == "Correct")
+                return 1;
+            else
+                return 0;
+        }
+
         public int VerifyStackID(List<Stack> stackData)
         {
             if (stackData.Count == 0)
@@ -61,7 +76,7 @@ namespace Flashcards.harris_andy
                 .Select(s => s.Id)
                 .ToList();
             var verifiedStackID = AnsiConsole.Prompt(
-            new TextPrompt<int>($"Enter stack ID to continue::")
+            new TextPrompt<int>($"Enter stack ID to continue:")
             .Validate((n) =>
             {
                 if (validIDs.Contains(n))

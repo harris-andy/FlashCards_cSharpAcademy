@@ -63,5 +63,21 @@ namespace Flashcards.harris_andy
             Console.WriteLine($"{message} {stackName}.");
             Thread.Sleep(2000);
         }
+
+        public void DisplayCard(string text)
+        {
+            Console.Clear();
+            Panel panel = new Panel(text);
+            panel.Header = new PanelHeader($"[blue]Flash Card[/]");
+            panel.HeaderAlignment(Justify.Center);
+            // panel.Border = BoxBorder.Ascii;
+            // panel.Border = BoxBorder.Square;
+            panel.Border = BoxBorder.Double;
+            panel.Border = BoxBorder.Rounded;
+            // panel.Border = BoxBorder.Heavy;
+            // panel.Border = BoxBorder.None;
+            panel.Padding = new Padding(10, 5, 10, 5);
+            AnsiConsole.Write(panel);
+        }
     }
 }

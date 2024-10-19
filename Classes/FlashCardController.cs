@@ -144,13 +144,21 @@ namespace Flashcards.harris_andy
 
         public void StudySession()
         {
+            float score = 0;
             int stackID = ChooseStack("choose existing");
             List<FlashCardDTO> flashCards = _useDB.GetFlashCardDTO(stackID);
             foreach (FlashCardDTO card in flashCards)
             {
-                Console.WriteLine($"Front: {card.Front}");
-                Console.WriteLine($"Back: {card.Back}");
-                Thread.Sleep(1500);
+                Console.Clear();
+                _displayData.DisplayCard(card.Front);
+                Console.WriteLine($"Press enter to flip card");
+                Console.Read();
+                Console.Clear();
+                _displayData.DisplayCard(card.Back);
+                score += _userInput.GetQuestionPoints();
+                Console.WriteLine($"Score: {score}");
+                Console.WriteLine($"Press enter to continue");
+                Console.Read();
             }
         }
     }
