@@ -72,6 +72,26 @@ namespace Flashcards.harris_andy
             // return flashCardID;
         }
 
+        public int AddStack(string name)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { Name = name };
+            string stackQuery = @"
+                IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @Name) 
+                    BEGIN 
+                        INSERT INTO stacks (name) VALUES (@Name); 
+                    END; 
+                SELECT Id FROM stacks WHERE name = @Name;";
+            int stackId = connection.QuerySingle<int>(stackQuery, parameters);
+            // connection.Execute(stackQuery, parameters);
+
+            // var stackId = connection.QuerySingle<int>(
+            // "IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @name) BEGIN INSERT INTO stacks (name) VALUES (@name); END; SELECT Id FROM stacks WHERE name = @name;",
+            // new { name = stackName });
+
+            return stackId;
+        }
+
         public void AddStudySession(StudySessionRecord record)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
@@ -96,24 +116,20 @@ namespace Flashcards.harris_andy
             return connection.Query<FlashCardDTO>(sql, parameters).ToList();
         }
 
-        public int AddStack(string name)
+        public string GetStackName(int stackID)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
-            var parameters = new { Name = name };
-            string stackQuery = @"
-                IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @Name) 
-                    BEGIN 
-                        INSERT INTO stacks (name) VALUES (@Name); 
-                    END; 
-                SELECT Id FROM stacks WHERE name = @Name;";
-            int stackId = connection.QuerySingle<int>(stackQuery, parameters);
-            // connection.Execute(stackQuery, parameters);
+            var parameters = new { ID = stackID };
+            string sql = "SELECT name FROM stacks WHERE Id = @ID";
+            return connection.QuerySingle<string>(sql, parameters);
+        }
 
-            // var stackId = connection.QuerySingle<int>(
-            // "IF NOT EXISTS (SELECT Id FROM stacks WHERE name = @name) BEGIN INSERT INTO stacks (name) VALUES (@name); END; SELECT Id FROM stacks WHERE name = @name;",
-            // new { name = stackName });
-
-            return stackId;
+        public List<StudySessionRecord> GetStudySessionRecords(int stackID)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var parameters = new { ID = stackID };
+            string sql = @"SELECT date, score, questions FROM study_sessions WHERE StackId = @ID";
+            return connection.Query<StudySessionRecord>(sql, parameters).ToList();
         }
 
         public void DeleteStack(int stackID)

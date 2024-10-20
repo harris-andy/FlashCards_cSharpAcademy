@@ -55,7 +55,7 @@ namespace Flashcards.harris_andy
                         DeleteStack();
                         break;
                     case 6:
-                        // view study session scores
+                        ViewStudySessions();
                         break;
                     default:
                         Console.Clear();
@@ -165,6 +165,15 @@ namespace Flashcards.harris_andy
             _userInput.WaitToContinue();
             StudySessionRecord record = new StudySessionRecord(date, score, questions, stackID);
             _useDB.AddStudySession(record);
+        }
+
+        public void ViewStudySessions()
+        {
+            int stackID = ChooseStack("choose existing");
+            string stackName = _useDB.GetStackName(stackID);
+            List<StudySessionRecord> records = _useDB.GetStudySessionRecords(stackID);
+            _displayData.ShowStudySessions(records, stackName);
+            _userInput.WaitToContinue();
         }
     }
 }
