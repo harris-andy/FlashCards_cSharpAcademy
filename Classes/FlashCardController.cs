@@ -138,8 +138,11 @@ namespace Flashcards.harris_andy
             _displayData.ShowStackNames(stackData);
             int stackID = _userInput.VerifyStackID(stackData);
             string message = $"Deleted stack";
-            _displayData.ShowStackMessage(stackData, stackID, message);
-            _useDB.DeleteStack(stackID);
+            if (_userInput.ConfirmDelete())
+            {
+                _displayData.ShowStackMessage(stackData, stackID, message);
+                _useDB.DeleteStack(stackID);
+            }
         }
 
         public void StudySession()

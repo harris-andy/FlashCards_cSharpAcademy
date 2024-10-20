@@ -8,6 +8,20 @@ namespace Flashcards.harris_andy
 {
     public class UserInput
     {
+        public bool ConfirmDelete()
+        {
+            bool confirmation = false;
+            string prompt = "Are you SURE you want to delete this stack? y/n";
+
+            confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>(prompt)
+                .AddChoice(true)
+                .AddChoice(false)
+                .WithConverter(choice => choice ? "y" : "n"));
+
+            return confirmation;
+        }
+
         public int GetMenuChoice(int start, int end, string text)
         {
             int menuChoice = AnsiConsole.Prompt(
@@ -16,7 +30,6 @@ namespace Flashcards.harris_andy
             {
                 if (start <= n && n <= end)
                     return ValidationResult.Success();
-
                 else
                     return ValidationResult.Error($"[red]Pick a valid option[/]");
             }));
