@@ -64,11 +64,11 @@ namespace Flashcards.harris_andy
             Thread.Sleep(2000);
         }
 
-        public void DisplayCard(string text)
+        public void DisplayCard(string text, int index)
         {
             Console.Clear();
             Panel panel = new Panel(text);
-            panel.Header = new PanelHeader($"[blue]Flash Card[/]");
+            panel.Header = new PanelHeader($"[blue]Flash Card: {index}[/]");
             panel.HeaderAlignment(Justify.Center);
             // panel.Border = BoxBorder.Ascii;
             // panel.Border = BoxBorder.Square;

@@ -150,11 +150,12 @@ namespace Flashcards.harris_andy
             DateTime date = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
             int score = 0;
             int questions = flashCards.Count();
-            foreach (FlashCardDTO card in flashCards)
+
+            for (int index = 0; index < flashCards.Count; index++)
             {
-                _displayData.DisplayCard(card.Front);
+                _displayData.DisplayCard(flashCards[index].Front, index + 1);
                 _userInput.WaitToContinue();
-                _displayData.DisplayCard(card.Back);
+                _displayData.DisplayCard(flashCards[index].Back, index + 1);
                 score += _userInput.GetQuestionPoints();
             }
             _displayData.DisplayScore(score, questions);
