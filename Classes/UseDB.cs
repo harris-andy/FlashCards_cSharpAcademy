@@ -115,6 +115,23 @@ namespace Flashcards.harris_andy
             // return stackData;
         }
 
+        public List<StackDTO> GetStacksAndSessionCount()
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            string sql = @"
+            SELECT 
+                stacks.Id,
+                stacks.name,
+                COUNT(study_sessions.Id) AS session_count
+            FROM 
+                stacks
+            LEFT JOIN 
+                study_sessions ON stacks.Id = study_sessions.stackId
+            GROUP BY 
+                stacks.Id, stacks.name;";
+            return connection.Query<StackDTO>(sql).ToList();
+        }
+
         public List<FlashCardDTO> GetFlashCardDTO(int stackID)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);

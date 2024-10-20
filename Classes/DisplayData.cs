@@ -37,7 +37,8 @@ namespace Flashcards.harris_andy
             table.BorderColor(Color.DarkSlateGray1);
             table.Border(TableBorder.Rounded);
             table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
-            table.AddColumn(new TableColumn("[blue1]Name[/]").RightAligned());
+            table.AddColumn(new TableColumn("[green1]Name[/]").RightAligned());
+            // table.AddColumn(new TableColumn("[blue1]Study Sessions[/]").LeftAligned());
 
             foreach (Stack stack in stackData)
             {
@@ -45,6 +46,7 @@ namespace Flashcards.harris_andy
                 table.AddRow(
                     $"[{color}]{stack.Id}[/]",
                     $"[{color}]{stack.Name ?? "N/A"}[/]"
+                // $"[{color}]{stack.Sessions}[/]"
                 );
                 isAlternateRow = !isAlternateRow;
             }
@@ -136,7 +138,7 @@ namespace Flashcards.harris_andy
             AnsiConsole.Write(panel);
         }
 
-        public void NothingFoundError(string item)
+        public void NothingFound(string item)
         {
             Console.Clear();
             Console.WriteLine($"No {item} found!");

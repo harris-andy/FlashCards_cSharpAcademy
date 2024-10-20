@@ -96,7 +96,6 @@ namespace Flashcards.harris_andy
         public int ChooseStack(string option)
         {
             Console.Clear();
-            // string chooseStackText = _userInput.ChooseNewOrOldStack();
             int stackID = -1;
             if (option == "create new")
                 stackID = CreateNewStack();
@@ -105,7 +104,7 @@ namespace Flashcards.harris_andy
                 List<Stack> stackData = _useDB.GetAllStackNames();
                 if (stackData.Count == 0)
                 {
-                    _displayData.NothingFoundError("stacks");
+                    _displayData.NothingFound("stacks");
                     return 0;
                 }
                 _displayData.ShowStackNames(stackData);
@@ -175,11 +174,14 @@ namespace Flashcards.harris_andy
             List<StudySessionDTO> records = _useDB.GetStudySessionRecords(stackID);
             if (records.Count == 0)
             {
-                _displayData.NothingFoundError("study sessions");
+                _displayData.NothingFound("study sessions");
                 ViewStudySessions();
             }
-            _displayData.ShowStudySessions(records, stackName);
-            _userInput.WaitToContinue();
+            else
+            {
+                _displayData.ShowStudySessions(records, stackName);
+                _userInput.WaitToContinue();
+            }
         }
 
         public void AddFakeData()

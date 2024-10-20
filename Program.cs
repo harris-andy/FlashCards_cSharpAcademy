@@ -3,7 +3,7 @@ Requirements
 
 BUGS
     - CreateNewStack always prints CW line
-    - 
+    - Show study session count when displaying Stack Info
 */
 
 using Flashcards.harris_andy;
