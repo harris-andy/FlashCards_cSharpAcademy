@@ -49,13 +49,13 @@ namespace Flashcards.harris_andy
                         CreateNewStack();
                         break;
                     case 4:
-                        // delete a flash card
-                        break;
-                    case 5:
                         DeleteStack();
                         break;
-                    case 6:
+                    case 5:
                         ViewStudySessions();
+                        break;
+                    case 6:
+                        AddFakeData();
                         break;
                     default:
                         Console.Clear();
@@ -69,6 +69,8 @@ namespace Flashcards.harris_andy
         {
             string chooseStackText = _userInput.ChooseNewOrOldStack();
             int stackID = ChooseStack(chooseStackText);
+            if (stackID == 0)
+                NewFlashCard();
             bool closeApp = false;
 
             while (closeApp == false)
@@ -103,9 +105,8 @@ namespace Flashcards.harris_andy
                 List<Stack> stackData = _useDB.GetAllStackNames();
                 if (stackData.Count == 0)
                 {
-                    Console.WriteLine("No stacks found!");
-                    Thread.Sleep(2000);
-                    NewFlashCard();
+                    _displayData.NothingFoundError("stacks");
+                    return 0;
                 }
                 _displayData.ShowStackNames(stackData);
                 stackID = _userInput.VerifyStackID(stackData);
@@ -171,9 +172,20 @@ namespace Flashcards.harris_andy
         {
             int stackID = ChooseStack("choose existing");
             string stackName = _useDB.GetStackName(stackID);
-            List<StudySessionRecord> records = _useDB.GetStudySessionRecords(stackID);
+            List<StudySessionDTO> records = _useDB.GetStudySessionRecords(stackID);
+            if (records.Count == 0)
+            {
+                _displayData.NothingFoundError("study sessions");
+                ViewStudySessions();
+            }
             _displayData.ShowStudySessions(records, stackName);
             _userInput.WaitToContinue();
+        }
+
+        public void AddFakeData()
+        {
+            string filePath = "./AddFakeFlashCards.sql";
+            _useDB.AddFakeData(filePath);
         }
     }
 }

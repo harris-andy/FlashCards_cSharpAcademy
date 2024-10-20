@@ -1,8 +1,6 @@
 ﻿/*
 Requirements
 
-    The project should contain a call to the study table so the users can see all their study sessions. This table receives insert calls upon each study session, but there shouldn't be update and delete calls to it.
-
 BUGS
     - CreateNewStack always prints CW line
     - 

@@ -92,6 +92,13 @@ namespace Flashcards.harris_andy
             return stackId;
         }
 
+        public void AddFakeData(string filePath)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            var sql = File.ReadAllText(filePath);
+            connection.Execute(sql);
+        }
+
         public void AddStudySession(StudySessionRecord record)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
@@ -124,12 +131,12 @@ namespace Flashcards.harris_andy
             return connection.QuerySingle<string>(sql, parameters);
         }
 
-        public List<StudySessionRecord> GetStudySessionRecords(int stackID)
+        public List<StudySessionDTO> GetStudySessionRecords(int stackID)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var parameters = new { ID = stackID };
             string sql = @"SELECT date, score, questions FROM study_sessions WHERE StackId = @ID";
-            return connection.Query<StudySessionRecord>(sql, parameters).ToList();
+            return connection.Query<StudySessionDTO>(sql, parameters).ToList();
         }
 
         public void DeleteStack(int stackID)

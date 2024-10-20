@@ -19,9 +19,9 @@ namespace Flashcards.harris_andy
                 "\tType 1 to Study Flashcards\n" +
                 "\tType 2 to Create a New Flash Card\n" +
                 "\tType 3 to Create a New Stack\n" +
-                "\tType 4 to Delete a Flash Card\n" +
-                "\tType 5 to Delete a Stack\n" +
-                "\tType 6 to View Study Session Scores\n" +
+                "\tType 4 to Delete a Stack\n" +
+                "\tType 5 to View Study Session Scores\n" +
+                "\tType 6 to Add Fake Data\n" +
                 // "\tType 7 to Add 100 Rows of Fake Data\n" +
                 // "\tType 8 to Start a Timed Coding Session. Neat!\n" +
                 // "\tType 9 to Set a Coding Goal\n" +
@@ -64,7 +64,7 @@ namespace Flashcards.harris_andy
             Thread.Sleep(2000);
         }
 
-        public void ShowStudySessions(List<StudySessionRecord> records, string name)
+        public void ShowStudySessions(List<StudySessionDTO> records, string name)
         {
             var table = new Table();
             bool isAlternateRow = false;
@@ -83,12 +83,12 @@ namespace Flashcards.harris_andy
             // table.AddColumn(new TableColumn("[yellow1]Goal Hours[/]").RightAligned());
             // table.AddColumn(new TableColumn("[red]Complete?[/]").LeftAligned());
 
-            foreach (StudySessionRecord record in records)
+            foreach (StudySessionDTO record in records)
             {
                 string grade = (record.Score / (float)record.Questions).ToString("P1");
                 var color = isAlternateRow ? "grey" : "blue";
                 table.AddRow(
-                    $"[{color}]{record.Date}[/]",
+                    $"[{color}]{record.Date.ToShortDateString()}[/]",
                     $"[{color}]{name}[/]",
                     $"[{color}]{record.Score}[/]",
                     $"[{color}]{record.Questions}[/]",
@@ -134,6 +134,13 @@ namespace Flashcards.harris_andy
             // panel.Border = BoxBorder.None;
             panel.Padding = new Padding(10, 5, 10, 5);
             AnsiConsole.Write(panel);
+        }
+
+        public void NothingFoundError(string item)
+        {
+            Console.Clear();
+            Console.WriteLine($"No {item} found!");
+            Thread.Sleep(2000);
         }
     }
 }
