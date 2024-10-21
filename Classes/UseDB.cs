@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Dapper;
+using Flashcards.harris_andy.Classes;
 
 namespace Flashcards.harris_andy
 {
@@ -165,11 +166,11 @@ namespace Flashcards.harris_andy
             connection.Execute(sql, parameters);
         }
 
-        public void GetStudySessionCounts()
+        public List<StudySessionReport> GetStudySessionCounts()
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
-            List<StudySessionReport> records = connection.QuerySingle<StudySessionReport>(sql).ToList();
+            return connection.Query<StudySessionReport>(sql).ToList();
         }
     }
 }

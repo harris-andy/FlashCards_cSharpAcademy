@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Flashcards.harris_andy.Classes;
 using Spectre.Console;
 
 namespace Flashcards.harris_andy
@@ -143,6 +144,55 @@ namespace Flashcards.harris_andy
             Console.Clear();
             Console.WriteLine($"No {item} found!");
             Thread.Sleep(2000);
+        }
+
+        public void ShowStudySessionReport(List<StudySessionReport> records, string title)
+        {
+            var table = new Table();
+            bool isAlternateRow = false;
+
+            table.Title(title);
+            table.BorderColor(Color.DarkSlateGray1);
+            table.Border(TableBorder.Rounded);
+            table.AddColumn(new TableColumn("[cyan1]Stack Name[/]").LeftAligned());
+            table.AddColumn(new TableColumn("[green1]January[/]").RightAligned());
+            table.AddColumn(new TableColumn("[blue1]February[/]").RightAligned());
+            table.AddColumn(new TableColumn("[yellow1]March[/]").RightAligned());
+            table.AddColumn(new TableColumn("[red1]April[/]").RightAligned());
+            table.AddColumn(new TableColumn("[cyan1]May[/]").RightAligned());
+            table.AddColumn(new TableColumn("[green1]June[/]").RightAligned());
+            table.AddColumn(new TableColumn("[blue1]July[/]").RightAligned());
+            table.AddColumn(new TableColumn("[yellow1]August[/]").RightAligned());
+            table.AddColumn(new TableColumn("[green1]September[/]").RightAligned());
+            table.AddColumn(new TableColumn("[blue1]October[/]").RightAligned());
+            table.AddColumn(new TableColumn("[cyan1]November[/]").RightAligned());
+            table.AddColumn(new TableColumn("[yellow]December[/]").LeftAligned());
+
+            foreach (StudySessionReport record in records)
+            {
+                // string grade = (record.Score / (float)record.Questions).ToString("P1");
+                var color = isAlternateRow ? "grey" : "blue";
+                table.AddRow(
+                    $"[{color}]{record.StackName}[/]",
+                    $"[{color}]{record.January}[/]",
+                    $"[{color}]{record.February}[/]",
+                    $"[{color}]{record.March}[/]",
+                    $"[{color}]{record.April}[/]",
+                    $"[{color}]{record.May}[/]",
+                    $"[{color}]{record.June}[/]",
+                    $"[{color}]{record.July}[/]",
+                    $"[{color}]{record.August}[/]",
+                    $"[{color}]{record.September}[/]",
+                    $"[{color}]{record.October}[/]",
+                    $"[{color}]{record.November}[/]",
+                    $"[{color}]{record.December}[/]"
+                );
+                isAlternateRow = !isAlternateRow;
+            }
+            Console.Clear();
+            AnsiConsole.Write(table);
+            // Console.WriteLine("Press any key to continue...");
+            // Console.Read();
         }
     }
 }

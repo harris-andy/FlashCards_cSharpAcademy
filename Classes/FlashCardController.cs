@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+using Flashcards.harris_andy.Classes;
 
 namespace Flashcards.harris_andy
 {
@@ -31,7 +32,7 @@ namespace Flashcards.harris_andy
             while (closeApp == false)
             {
                 _displayData.MainMenu();
-                int inputNumber = _userInput.GetMenuChoice(0, 6, "Menu choice:");
+                int inputNumber = _userInput.GetMenuChoice(0, 8, "Menu choice:");
                 switch (inputNumber)
                 {
                     case 0:
@@ -204,8 +205,10 @@ namespace Flashcards.harris_andy
 
         public void StudySessionCounts()
         {
-            _useDB.GetStudySessionCounts();
-            // 
+            string title = "Study Sessions per Month";
+            List<StudySessionReport> studySessionCounts = _useDB.GetStudySessionCounts();
+            _displayData.ShowStudySessionReport(studySessionCounts, title);
+            _userInput.WaitToContinue();
         }
     }
 }

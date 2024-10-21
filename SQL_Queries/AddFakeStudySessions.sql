@@ -1,4 +1,4 @@
--- Declare a variable to hold the date and other parameters
+-- Thanks again ChatGPT! 
 DECLARE @StackId INT;
 DECLARE @Score INT;
 DECLARE @Questions INT;
