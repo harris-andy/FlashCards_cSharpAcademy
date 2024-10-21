@@ -204,7 +204,7 @@ namespace Flashcards.harris_andy
 
         public void StudySessionCounts()
         {
-            // 1. get data
+            _useDB.GetStudySessionCounts();
             // 
         }
     }

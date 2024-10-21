@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flashcards.harris-andy")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d87dc904620bbc61b71537b1512791963118f16c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+857f9f9b9bb2b01eaa8a3150ae1ebcd6ecb7e9f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flashcards.harris-andy")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flashcards.harris-andy")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

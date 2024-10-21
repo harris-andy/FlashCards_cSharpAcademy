@@ -169,7 +169,7 @@ namespace Flashcards.harris_andy
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             var sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
-            var records = connection.Execute(sql);
+            List<StudySessionReport> records = connection.QuerySingle<StudySessionReport>(sql).ToList();
         }
     }
 }

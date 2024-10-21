@@ -21,7 +21,7 @@ namespace Flashcards.harris_andy
                 "\tType 3 to Create a New Stack\n" +
                 "\tType 4 to Delete a Stack\n" +
                 "\tType 5 to View Study Session Scores\n" +
-                "\tType 6 to View Summary of Study Sessions (Counts)\n" +
+                "\tType 6 to View Count of Study Sessions\n" +
                 "\tType 7 to Add Fake Data\n" +
                 "\tType 8 to Add Fake Study Sessions\n" +
                 // "\tType 9 to Set a Coding Goal\n" +

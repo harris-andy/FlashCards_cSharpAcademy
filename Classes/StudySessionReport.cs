@@ -8,33 +8,33 @@ namespace Flashcards.harris_andy.Classes
     public class StudySessionReport
     {
         public string StackName { get; set; }
-        public int January { get; set; }
-        public int February { get; set; }
-        public int March { get; set; }
-        public int April { get; set; }
-        public int May { get; set; }
-        public int June { get; set; }
-        public int July { get; set; }
-        public int August { get; set; }
-        public int September { get; set; }
-        public int October { get; set; }
-        public int November { get; set; }
-        public int December { get; set; }
+        public float January { get; set; }
+        public float February { get; set; }
+        public float March { get; set; }
+        public float April { get; set; }
+        public float May { get; set; }
+        public float June { get; set; }
+        public float July { get; set; }
+        public float August { get; set; }
+        public float September { get; set; }
+        public float October { get; set; }
+        public float November { get; set; }
+        public float December { get; set; }
 
         public StudySessionReport(
             string stackName,
-            int january,
-            int february,
-            int march,
-            int april,
-            int may,
-            int june,
-            int july,
-            int august,
-            int september,
-            int october,
-            int november,
-            int december)
+            float january,
+            float february,
+            float march,
+            float april,
+            float may,
+            float june,
+            float july,
+            float august,
+            float september,
+            float october,
+            float november,
+            float december)
         {
             StackName = stackName;
             January = january;
