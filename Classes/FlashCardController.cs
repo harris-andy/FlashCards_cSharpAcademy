@@ -205,8 +205,15 @@ namespace Flashcards.harris_andy
 
         public void StudySessionCounts()
         {
-            string title = "Study Sessions per Month";
-            List<StudySessionReport> studySessionCounts = _useDB.GetStudySessionCounts();
+            List<int> years = _useDB.GetYears();
+            List<string> choices = new List<string>();
+            foreach (int y in years)
+            {
+                choices.Add(y.ToString());
+            }
+            int year = _userInput.ChooseYear(choices);
+            string title = $"Study Sessions per Month for: {year}";
+            List<StudySessionReport> studySessionCounts = _useDB.GetStudySessionCounts(year);
             _displayData.ShowStudySessionReport(studySessionCounts, title);
             _userInput.WaitToContinue();
         }

@@ -1,6 +1,5 @@
 SELECT * FROM (
     SELECT
-        -- CAST(study_sessions.Id AS FLOAT) AS StudyID, 
         study_sessions.Id AS StudyID,
         stacks.name AS StackName,
         CASE MONTH(date)
@@ -19,9 +18,8 @@ SELECT * FROM (
         END AS MonthDate
     FROM study_sessions
     JOIN stacks ON stacks.Id  = study_sessions.StackId
+    WHERE YEAR(date) = @Year
 ) temp
 PIVOT (
     COUNT(StudyID) FOR MonthDate IN ([January], [February], [March], [April], [May], [June], [July], [August], [September], [October], [November], [December])
 ) AS session_count_pivot;
-
--- number of sessions per month per stack

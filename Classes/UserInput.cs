@@ -107,6 +107,16 @@ namespace Flashcards.harris_andy
             Console.Read();
         }
 
+        public int ChooseYear(List<string> choices)
+        {
+            string answer = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Choose [green]year[/] for summary:")
+                    .PageSize(3)
+                    .AddChoices(choices));
+            return int.Parse(answer);
+        }
+
         // public string GetStackName(string message)
         // {
         //     UseDB usingDB = new UseDB();

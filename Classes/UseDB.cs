@@ -166,11 +166,19 @@ namespace Flashcards.harris_andy
             connection.Execute(sql, parameters);
         }
 
-        public List<StudySessionReport> GetStudySessionCounts()
+        public List<StudySessionReport> GetStudySessionCounts(int year)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
-            var sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
-            return connection.Query<StudySessionReport>(sql).ToList();
+            string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
+            var parameters = new { Year = year };
+            return connection.Query<StudySessionReport>(sql, parameters).ToList();
+        }
+
+        public List<int> GetYears()
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            string sql = @"SELECT DISTINCT YEAR(date) FROM study_sessions";
+            return connection.Query<int>(sql).ToList();
         }
     }
 }
