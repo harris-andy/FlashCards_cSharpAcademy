@@ -216,7 +216,6 @@ namespace Flashcards.harris_andy
             }
             int year = _userInput.ChooseYear(choices);
 
-            // these two are only different lines
             string title = $"Monthly Study Sessions for: {year}";
             List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
 
@@ -234,7 +233,6 @@ namespace Flashcards.harris_andy
             }
             int year = _userInput.ChooseYear(choices);
 
-            // these two are only different lines0
             string title = $"Month Grades for: {year}";
             List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
 
