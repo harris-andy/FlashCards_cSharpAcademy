@@ -1,6 +1,6 @@
 SELECT * FROM (
     SELECT
-        study_sessions.Id AS StudyID,
+        CAST(study_sessions.Id AS FLOAT) AS StudyID,
         stacks.name AS StackName,
         CASE MONTH(date)
                 WHEN 1 THEN 'January'

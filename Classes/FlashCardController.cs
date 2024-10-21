@@ -59,7 +59,7 @@ namespace Flashcards.harris_andy
                         StudySessionCounts();
                         break;
                     case 7:
-                        // StudySessionGrades();
+                        StudySessionGrades();
                         break;
                     case 8:
                         AddFakeData();
@@ -220,26 +220,26 @@ namespace Flashcards.harris_andy
             string title = $"Monthly Study Sessions for: {year}";
             List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
 
-            _displayData.ShowStudySessionReport(studySessionCounts, title);
+            _displayData.ShowStudySessionCounts(studySessionCounts, title);
             _userInput.WaitToContinue();
         }
 
-        // public void StudySessionGrades()
-        // {
-        //     List<int> years = _useDB.GetYears();
-        //     List<string> choices = new List<string>();
-        //     foreach (int y in years)
-        //     {
-        //         choices.Add(y.ToString());
-        //     }
-        //     int year = _userInput.ChooseYear(choices);
+        public void StudySessionGrades()
+        {
+            List<int> years = _useDB.GetYears();
+            List<string> choices = new List<string>();
+            foreach (int y in years)
+            {
+                choices.Add(y.ToString());
+            }
+            int year = _userInput.ChooseYear(choices);
 
-        //     // these two are only different lines
-        //     string title = $"Month Grades for: {year}";
-        //     List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
+            // these two are only different lines0
+            string title = $"Month Grades for: {year}";
+            List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
 
-        //     _displayData.ShowStudySessionReport(studySessionCounts, title);
-        //     _userInput.WaitToContinue();
-        // }
+            _displayData.ShowStudySessionGrades(studySessionCounts, title);
+            _userInput.WaitToContinue();
+        }
     }
 }

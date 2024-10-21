@@ -166,6 +166,13 @@ namespace Flashcards.harris_andy
             connection.Execute(sql, parameters);
         }
 
+        public List<int> GetYears()
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            string sql = @"SELECT DISTINCT YEAR(date) FROM study_sessions";
+            return connection.Query<int>(sql).ToList();
+        }
+
         public List<StudyReportCounts> GetStudySessionCounts(int year)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
@@ -180,14 +187,6 @@ namespace Flashcards.harris_andy
             string sql = File.ReadAllText("./SQL_Queries/PivotAvgScore.sql");
             var parameters = new { Year = year };
             return connection.Query<StudyReportGrades>(sql, parameters).ToList();
-        }
-
-
-        public List<int> GetYears()
-        {
-            using var connection = new SqlConnection(AppConfig.ConnectionString);
-            string sql = @"SELECT DISTINCT YEAR(date) FROM study_sessions";
-            return connection.Query<int>(sql).ToList();
         }
     }
 }
