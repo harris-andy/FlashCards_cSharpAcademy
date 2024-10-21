@@ -55,7 +55,13 @@ namespace Flashcards.harris_andy
                         ViewStudySessions();
                         break;
                     case 6:
+                        StudySessionCounts();
+                        break;
+                    case 7:
                         AddFakeData();
+                        break;
+                    case 8:
+                        AddFakeStudySessions();
                         break;
                     default:
                         Console.Clear();
@@ -186,8 +192,20 @@ namespace Flashcards.harris_andy
 
         public void AddFakeData()
         {
-            string filePath = "./AddFakeFlashCards.sql";
-            _useDB.AddFakeData(filePath);
+            string flashCardsPath = "./SQL_Queries/AddFakeFlashCards.sql";
+            _useDB.AddFakeData(flashCardsPath);
+        }
+
+        public void AddFakeStudySessions()
+        {
+            string sessionsPath = "./SQL_Queries/AddFakeStudySessions.sql";
+            _useDB.AddFakeData(sessionsPath);
+        }
+
+        public void StudySessionCounts()
+        {
+            // 1. get data
+            // 
         }
     }
 }
