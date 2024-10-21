@@ -116,26 +116,5 @@ namespace Flashcards.harris_andy
                     .AddChoices(choices));
             return int.Parse(answer);
         }
-
-        // public string GetStackName(string message)
-        // {
-        //     UseDB usingDB = new UseDB();
-        //     List<Stack> stackData = usingDB.GetAllStackNames();
-        //     var names = stackData.Select(n => n.Name);
-        // }
-
-        // public int CreateOrSelectStack()
-        // {
-        //     int choice = AnsiConsole.Prompt(
-        //         new TextPrompt<int>("How do you want your stack?\n1. Choose stack from list\n2. Create new stack")
-        //         .Validate((n) =>
-        //         {
-        //             if (n == 1 || n == 2)
-        //                 return ValidationResult.Success();
-        //             else
-        //                 return ValidationResult.Error($"[red]Must be a valid choice[/]");
-        //         }));
-        //     return choice;
-        // }
     }
 }

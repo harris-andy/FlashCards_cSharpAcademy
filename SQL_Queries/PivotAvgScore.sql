@@ -21,6 +21,7 @@ SELECT * FROM (
         END AS MonthDate
     FROM study_sessions
     JOIN stacks ON stacks.Id  = study_sessions.StackId
+    WHERE YEAR(date) = @Year
     GROUP BY stacks.name, MONTH(date)
 ) temp
 PIVOT (
