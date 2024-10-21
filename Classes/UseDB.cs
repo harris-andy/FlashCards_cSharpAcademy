@@ -188,5 +188,14 @@ namespace Flashcards.harris_andy
             var parameters = new { Year = year };
             return connection.Query<StudyReportGrades>(sql, parameters).ToList();
         }
+
+        public List<StudyReport> GetStudySessionTEST(int year)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            // string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
+            string sql = File.ReadAllText("./SQL_Queries/PivotAvgScore.sql");
+            var parameters = new { Year = year };
+            return connection.Query<StudyReport>(sql, parameters).ToList();
+        }
     }
 }

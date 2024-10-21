@@ -62,7 +62,8 @@ namespace Flashcards.harris_andy
                         StudySessionGrades();
                         break;
                     case 8:
-                        AddFakeData();
+                        // AddFakeData();
+                        StudyReportTEST();
                         break;
                     case 9:
                         AddFakeStudySessions();
@@ -237,6 +238,23 @@ namespace Flashcards.harris_andy
             List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
 
             _displayData.ShowStudySessionGrades(studySessionCounts, title);
+            _userInput.WaitToContinue();
+        }
+
+        public void StudyReportTEST()
+        {
+            List<int> years = _useDB.GetYears();
+            List<string> choices = new List<string>();
+            foreach (int y in years)
+            {
+                choices.Add(y.ToString());
+            }
+            int year = _userInput.ChooseYear(choices);
+
+            string title = $"Monthly Study Sessions for: {year}";
+            List<StudyReport> studySessionCounts = _useDB.GetStudySessionTEST(year);
+
+            _displayData.ShowStudySessionTEST(studySessionCounts, title);
             _userInput.WaitToContinue();
         }
     }
