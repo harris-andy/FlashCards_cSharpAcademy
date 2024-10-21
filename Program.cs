@@ -1,5 +1,7 @@
 ﻿/*
 Requirements
+    - finish displaying grades by mont
+    - combine grades & counts functions
 
 BUGS
     - CreateNewStack always prints CW line

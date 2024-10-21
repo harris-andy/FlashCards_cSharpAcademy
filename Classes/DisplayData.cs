@@ -21,11 +21,11 @@ namespace Flashcards.harris_andy
                 "\tType 2 to Create a New Flash Card\n" +
                 "\tType 3 to Create a New Stack\n" +
                 "\tType 4 to Delete a Stack\n" +
-                "\tType 5 to View Study Session Scores\n" +
-                "\tType 6 to View Count of Study Sessions\n" +
-                "\tType 7 to Add Fake Data\n" +
-                "\tType 8 to Add Fake Study Sessions\n" +
-                // "\tType 9 to Set a Coding Goal\n" +
+                "\tType 5 to View Study Sessions\n" +
+                "\tType 6 to View Study Sessions COUNT by Month\n" +
+                "\tType 7 to View Study Sessions GRADES by Month\n" +
+                "\tType 8 to Add Fake Data\n" +
+                "\tType 9 to Add Fake Study Sessions\n" +
                 // "\tType 10 to Get Coding Goal Progress\n" +
                 "--------------------------------------------------\n");
         }
@@ -146,7 +146,7 @@ namespace Flashcards.harris_andy
             Thread.Sleep(2000);
         }
 
-        public void ShowStudySessionReport(List<StudySessionReport> records, string title)
+        public void ShowStudySessionReport(List<StudyReportCounts> records, string title)
         {
             var table = new Table();
             bool isAlternateRow = false;
@@ -168,7 +168,7 @@ namespace Flashcards.harris_andy
             table.AddColumn(new TableColumn("[cyan1]November[/]").RightAligned());
             table.AddColumn(new TableColumn("[yellow]December[/]").LeftAligned());
 
-            foreach (StudySessionReport record in records)
+            foreach (StudyReportCounts record in records)
             {
                 // string grade = (record.Score / (float)record.Questions).ToString("P1");
                 var color = isAlternateRow ? "grey" : "blue";

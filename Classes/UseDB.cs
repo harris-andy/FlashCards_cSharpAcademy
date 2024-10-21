@@ -166,13 +166,22 @@ namespace Flashcards.harris_andy
             connection.Execute(sql, parameters);
         }
 
-        public List<StudySessionReport> GetStudySessionCounts(int year)
+        public List<StudyReportCounts> GetStudySessionCounts(int year)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
             var parameters = new { Year = year };
-            return connection.Query<StudySessionReport>(sql, parameters).ToList();
+            return connection.Query<StudyReportCounts>(sql, parameters).ToList();
         }
+
+        public List<StudyReportGrades> GetStudySessionGrades(int year)
+        {
+            using var connection = new SqlConnection(AppConfig.ConnectionString);
+            string sql = File.ReadAllText("./SQL_Queries/PivotAvgScore.sql");
+            var parameters = new { Year = year };
+            return connection.Query<StudyReportGrades>(sql, parameters).ToList();
+        }
+
 
         public List<int> GetYears()
         {

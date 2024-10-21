@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Flashcards.harris_andy.Classes
 {
-    public class StudySessionReport
+    public class StudyReportCounts
     {
         public string StackName { get; set; }
         public int January { get; set; }
@@ -21,7 +21,7 @@ namespace Flashcards.harris_andy.Classes
         public int November { get; set; }
         public int December { get; set; }
 
-        public StudySessionReport(
+        public StudyReportCounts(
             string stackName,
             int january,
             int february,

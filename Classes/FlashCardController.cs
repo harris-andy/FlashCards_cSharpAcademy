@@ -32,7 +32,7 @@ namespace Flashcards.harris_andy
             while (closeApp == false)
             {
                 _displayData.MainMenu();
-                int inputNumber = _userInput.GetMenuChoice(0, 8, "Menu choice:");
+                int inputNumber = _userInput.GetMenuChoice(0, 9, "Menu choice:");
                 switch (inputNumber)
                 {
                     case 0:
@@ -59,9 +59,12 @@ namespace Flashcards.harris_andy
                         StudySessionCounts();
                         break;
                     case 7:
-                        AddFakeData();
+                        // StudySessionGrades();
                         break;
                     case 8:
+                        AddFakeData();
+                        break;
+                    case 9:
                         AddFakeStudySessions();
                         break;
                     default:
@@ -212,10 +215,31 @@ namespace Flashcards.harris_andy
                 choices.Add(y.ToString());
             }
             int year = _userInput.ChooseYear(choices);
-            string title = $"Study Sessions per Month for: {year}";
-            List<StudySessionReport> studySessionCounts = _useDB.GetStudySessionCounts(year);
+
+            // these two are only different lines
+            string title = $"Monthly Study Sessions for: {year}";
+            List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
+
             _displayData.ShowStudySessionReport(studySessionCounts, title);
             _userInput.WaitToContinue();
         }
+
+        // public void StudySessionGrades()
+        // {
+        //     List<int> years = _useDB.GetYears();
+        //     List<string> choices = new List<string>();
+        //     foreach (int y in years)
+        //     {
+        //         choices.Add(y.ToString());
+        //     }
+        //     int year = _userInput.ChooseYear(choices);
+
+        //     // these two are only different lines
+        //     string title = $"Month Grades for: {year}";
+        //     List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
+
+        //     _displayData.ShowStudySessionReport(studySessionCounts, title);
+        //     _userInput.WaitToContinue();
+        // }
     }
 }
