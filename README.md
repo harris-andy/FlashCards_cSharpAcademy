@@ -12,7 +12,7 @@ This is my submission for the cSharpAcademy Flash Cards project found here: [Cod
 - Follow the instructions and away you go
 - i.e. Select from the menu to perform operations such as: adding/deleting flash cards or stacks, studying flash cards and viewing study session stats.
 
-![main menu](/images/mainmenu3.png)
+![main menu](/Images/mainmenu3.png)
 
 ## Features
 - Study flash cards. User's score is recorded in the database.
@@ -20,19 +20,19 @@ This is my submission for the cSharpAcademy Flash Cards project found here: [Cod
 - Options to add fake flash cards, stacks and study sessions (ChatGPT helped with this SQL, it's a bit out of my pay grade).
 
 
-![flash card](/images/flashcard.png)
+![flash card](/Images/flashcard.png)
 
 
 - Get summary records by year
 
 
-![summary year](/images/fcsummary.png)
+![summary year](/Images/fcsummary.png)
 
 
 - View study session history by subject
 
 
-![coding goal progress](/images/studysessions.png)
+![study session history](/Images/studysessions.png)
 
 
 ## More to do
