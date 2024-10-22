@@ -50,3 +50,4 @@ This is my submission for the cSharpAcademy Flash Cards project found here: [Cod
 ## Questions & Comments
 - I used AI for some of the table styling. I can't stand UI design so I gave up and let Claude make it pretty.
 - I tried to improve my organization but would appreciate any suggestions for improvement.
+- Should I add "bin/Debug/net8.0" and ".vscode" to the gitignore?
