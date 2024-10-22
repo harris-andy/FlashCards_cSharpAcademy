@@ -1,7 +1,8 @@
 SELECT * FROM (
     SELECT
         -- study_sessions.Id AS StudyID, 
-        ISNULL(CAST(SUM(study_sessions.score) AS FLOAT) / CAST(SUM(study_sessions.questions) AS FLOAT), 0) AS Grade,
+        CAST(SUM(study_sessions.score) AS FLOAT) / CAST(SUM(study_sessions.questions) AS FLOAT) AS Grade,
+        -- COALESCE(CAST(SUM(study_sessions.score) AS FLOAT) / CAST(SUM(study_sessions.questions) AS FLOAT), 0.0) AS Grade,
         -- study_sessions.score AS Score,
         -- study_sessions.questions as Questions,
         stacks.name AS StackName,

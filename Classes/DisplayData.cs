@@ -192,7 +192,7 @@ namespace Flashcards.harris_andy
             AnsiConsole.Write(table);
         }
 
-        public void ShowStudySessionGrades(List<StudyReportGrades> records, string title, string caster)
+        public void ShowStudySessionGrades(List<StudyReportGrades> records, string title)
         {
             var table = new Table();
             bool isAlternateRow = false;
@@ -238,7 +238,7 @@ namespace Flashcards.harris_andy
             AnsiConsole.Write(table);
         }
 
-        public void ShowStudySessionTEST(List<StudyReport> records, string title)
+        public void ShowStudySessionTEST(List<StudyReport> records, string title, string caster)
         {
             var table = new Table();
             bool isAlternateRow = false;
@@ -260,30 +260,61 @@ namespace Flashcards.harris_andy
             table.AddColumn(new TableColumn("[cyan1]November[/]").RightAligned());
             table.AddColumn(new TableColumn("[yellow]December[/]").LeftAligned());
 
-            foreach (StudyReport record in records)
+            if (caster == "counts")
             {
-                var color = isAlternateRow ? "grey" : "blue";
-                table.AddRow(
-                    $"[{color}]{record.StackName}[/]",
-                    $"[{color}]{record.January}[/]",
-                    $"[{color}]{record.February}[/]",
-                    $"[{color}]{record.March}[/]",
-                    $"[{color}]{record.April}[/]",
-                    $"[{color}]{record.May}[/]",
-                    $"[{color}]{record.June}[/]",
-                    $"[{color}]{record.July}[/]",
-                    $"[{color}]{record.August}[/]",
-                    $"[{color}]{record.September}[/]",
-                    $"[{color}]{record.October}[/]",
-                    $"[{color}]{record.November}[/]",
-                    $"[{color}]{record.December}[/]"
-                );
-                isAlternateRow = !isAlternateRow;
+                foreach (StudyReport record in records)
+                {
+                    var color = isAlternateRow ? "grey" : "blue";
+                    table.AddRow(
+                        $"[{color}]{record.StackName}[/]",
+                        $"[{color}]{record.January}[/]",
+                        $"[{color}]{record.February}[/]",
+                        $"[{color}]{record.March}[/]",
+                        $"[{color}]{record.April}[/]",
+                        $"[{color}]{record.May}[/]",
+                        $"[{color}]{record.June}[/]",
+                        $"[{color}]{record.July}[/]",
+                        $"[{color}]{record.August}[/]",
+                        $"[{color}]{record.September}[/]",
+                        $"[{color}]{record.October}[/]",
+                        $"[{color}]{record.November}[/]",
+                        $"[{color}]{record.December}[/]"
+                    );
+                    isAlternateRow = !isAlternateRow;
+                }
+            }
+            if (caster == "grades")
+            {
+                foreach (StudyReport record in records)
+                {
+                    var color = isAlternateRow ? "grey" : "blue";
+                    table.AddRow(
+                        $"[{color}]{record.StackName}[/]",
+                        FormatGrade(record.January, color),
+                        FormatGrade(record.February, color),
+                        FormatGrade(record.March, color),
+                        FormatGrade(record.April, color),
+                        FormatGrade(record.May, color),
+                        FormatGrade(record.June, color),
+                        FormatGrade(record.July, color),
+                        FormatGrade(record.August, color),
+                        FormatGrade(record.September, color),
+                        FormatGrade(record.October, color),
+                        FormatGrade(record.November, color),
+                        FormatGrade(record.December, color)
+                    );
+                    isAlternateRow = !isAlternateRow;
+                }
             }
             Console.Clear();
             AnsiConsole.Write(table);
         }
+
+        private string FormatGrade(object value, string color)
+        {
+            return $"[{color}]{(value == null ? "0.0%" : Convert.ToDouble(value).ToString("P1"))}[/]";
+        }
     }
 }
-
 // $"[{color}]{((double)record.January).ToString("P1")}[/]",
+// $"[{color}]{(record.January == null ? "0.0%" : Convert.ToDouble(record.January).ToString("P1"))}[/]",

@@ -207,7 +207,7 @@ namespace Flashcards.harris_andy
             _useDB.AddFakeData(sessionsPath);
         }
 
-        public void StudySessionCounts()
+        public int GetYear()
         {
             List<int> years = _useDB.GetYears();
             List<string> choices = new List<string>();
@@ -215,46 +215,37 @@ namespace Flashcards.harris_andy
             {
                 choices.Add(y.ToString());
             }
-            int year = _userInput.ChooseYear(choices);
+            return _userInput.ChooseYear(choices);
+        }
 
+        public void StudySessionCounts()
+        {
+            int year = GetYear();
             string title = $"Monthly Study Sessions for: {year}";
+            // string filePath = "./SQL_Queries/PivotCounts.sql";
             List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
-
             _displayData.ShowStudySessionCounts(studySessionCounts, title);
             _userInput.WaitToContinue();
         }
 
         public void StudySessionGrades()
         {
-            List<int> years = _useDB.GetYears();
-            List<string> choices = new List<string>();
-            foreach (int y in years)
-            {
-                choices.Add(y.ToString());
-            }
-            int year = _userInput.ChooseYear(choices);
-
+            int year = GetYear();
             string title = $"Month Grades for: {year}";
+            // string filePath = "./SQL_Queries/PivotAvgScore.sql";
             List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
-
             _displayData.ShowStudySessionGrades(studySessionCounts, title);
             _userInput.WaitToContinue();
         }
 
         public void StudyReportTEST()
         {
-            List<int> years = _useDB.GetYears();
-            List<string> choices = new List<string>();
-            foreach (int y in years)
-            {
-                choices.Add(y.ToString());
-            }
-            int year = _userInput.ChooseYear(choices);
-
+            int year = GetYear();
             string title = $"Monthly Study Sessions for: {year}";
-            List<StudyReport> studySessionCounts = _useDB.GetStudySessionTEST(year);
-
-            _displayData.ShowStudySessionTEST(studySessionCounts, title);
+            string filePath = "./SQL_Queries/PivotAvgScore.sql";
+            // string filePath2 = "./SQL_Queries/PivotCounts.sql";
+            List<StudyReport> studySessionCounts = _useDB.GetStudySessionTEST(year, filePath);
+            _displayData.ShowStudySessionTEST(studySessionCounts, title, "grades");
             _userInput.WaitToContinue();
         }
     }
