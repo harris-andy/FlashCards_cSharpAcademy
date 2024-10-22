@@ -56,14 +56,13 @@ namespace Flashcards.harris_andy
                         ViewStudySessions();
                         break;
                     case 6:
-                        StudySessionCounts();
+                        StudyReport("counts");
                         break;
                     case 7:
-                        StudySessionGrades();
+                        StudyReport("grades");
                         break;
                     case 8:
-                        // AddFakeData();
-                        StudyReportTEST();
+                        AddFakeData();
                         break;
                     case 9:
                         AddFakeStudySessions();
@@ -218,34 +217,37 @@ namespace Flashcards.harris_andy
             return _userInput.ChooseYear(choices);
         }
 
-        public void StudySessionCounts()
-        {
-            int year = GetYear();
-            string title = $"Monthly Study Sessions for: {year}";
-            // string filePath = "./SQL_Queries/PivotCounts.sql";
-            List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
-            _displayData.ShowStudySessionCounts(studySessionCounts, title);
-            _userInput.WaitToContinue();
-        }
+        // public void StudySessionCounts()
+        // {
+        //     int year = GetYear();
+        //     string title = $"Monthly Study Sessions for: {year}";
+        //     // string filePath = "./SQL_Queries/PivotCounts.sql";
+        //     List<StudyReportCounts> studySessionCounts = _useDB.GetStudySessionCounts(year);
+        //     _displayData.ShowStudySessionCounts(studySessionCounts, title);
+        //     _userInput.WaitToContinue();
+        // }
 
-        public void StudySessionGrades()
-        {
-            int year = GetYear();
-            string title = $"Month Grades for: {year}";
-            // string filePath = "./SQL_Queries/PivotAvgScore.sql";
-            List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
-            _displayData.ShowStudySessionGrades(studySessionCounts, title);
-            _userInput.WaitToContinue();
-        }
+        // public void StudySessionGrades()
+        // {
+        //     int year = GetYear();
+        //     string title = $"Month Grades for: {year}";
+        //     // string filePath = "./SQL_Queries/PivotAvgScore.sql";
+        //     List<StudyReportGrades> studySessionCounts = _useDB.GetStudySessionGrades(year);
+        //     _displayData.ShowStudySessionGrades(studySessionCounts, title);
+        //     _userInput.WaitToContinue();
+        // }
 
-        public void StudyReportTEST()
+        public void StudyReport(string reportType)
         {
             int year = GetYear();
-            string title = $"Monthly Study Sessions for: {year}";
-            string filePath = "./SQL_Queries/PivotAvgScore.sql";
-            // string filePath2 = "./SQL_Queries/PivotCounts.sql";
-            List<StudyReport> studySessionCounts = _useDB.GetStudySessionTEST(year, filePath);
-            _displayData.ShowStudySessionTEST(studySessionCounts, title, "grades");
+            var (title, filePath) = reportType switch
+            {
+                "counts" => ($"Monthly Study Sessions for: {year}", "./SQL_Queries/PivotCounts.sql"),
+                "grades" => ($"Month Grades for: {year}", "./SQL_Queries/PivotAvgScore.sql"),
+                _ => throw new ArgumentException($"Invalid reportType: {reportType}")
+            };
+            List<StudyReport> studySessionCounts = _useDB.GetStudyReport(year, filePath);
+            _displayData.DisplayStudyReport(studySessionCounts, title, reportType);
             _userInput.WaitToContinue();
         }
     }

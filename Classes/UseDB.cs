@@ -173,23 +173,23 @@ namespace Flashcards.harris_andy
             return connection.Query<int>(sql).ToList();
         }
 
-        public List<StudyReportCounts> GetStudySessionCounts(int year)
-        {
-            using var connection = new SqlConnection(AppConfig.ConnectionString);
-            string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
-            var parameters = new { Year = year };
-            return connection.Query<StudyReportCounts>(sql, parameters).ToList();
-        }
+        // public List<StudyReportCounts> GetStudySessionCounts(int year)
+        // {
+        //     using var connection = new SqlConnection(AppConfig.ConnectionString);
+        //     string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
+        //     var parameters = new { Year = year };
+        //     return connection.Query<StudyReportCounts>(sql, parameters).ToList();
+        // }
 
-        public List<StudyReportGrades> GetStudySessionGrades(int year)
-        {
-            using var connection = new SqlConnection(AppConfig.ConnectionString);
-            string sql = File.ReadAllText("./SQL_Queries/PivotAvgScore.sql");
-            var parameters = new { Year = year };
-            return connection.Query<StudyReportGrades>(sql, parameters).ToList();
-        }
+        // public List<StudyReportGrades> GetStudySessionGrades(int year)
+        // {
+        //     using var connection = new SqlConnection(AppConfig.ConnectionString);
+        //     string sql = File.ReadAllText("./SQL_Queries/PivotAvgScore.sql");
+        //     var parameters = new { Year = year };
+        //     return connection.Query<StudyReportGrades>(sql, parameters).ToList();
+        // }
 
-        public List<StudyReport> GetStudySessionTEST(int year, string filePath)
+        public List<StudyReport> GetStudyReport(int year, string filePath)
         {
             using var connection = new SqlConnection(AppConfig.ConnectionString);
             // string sql = File.ReadAllText("./SQL_Queries/PivotCounts.sql");
