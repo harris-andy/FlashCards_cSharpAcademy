@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Threading.Tasks;
 using Flashcards.harris_andy.Classes;
 
 namespace Flashcards.harris_andy;
