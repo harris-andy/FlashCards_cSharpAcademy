@@ -5,25 +5,52 @@ namespace Flashcards.harris_andy;
 
 public class DisplayData
 {
+    // public void MainMenu()
+    // {
+    //     Console.Clear();
+    //     Console.WriteLine(
+    //         "--------------------------------------------------\n" +
+    //         "\n\t\tMAIN MENU\n\n" +
+    //         "\tWhat would you like to do?\n\n" +
+    //         "\tType 0 to Close Application\n" +
+    //         "\tType 1 to Study Flashcards\n" +
+    //         "\tType 2 to Create a New Flash Card\n" +
+    //         "\tType 3 to Create a New Stack\n" +
+    //         "\tType 4 to Delete a Stack\n" +
+    //         "\tType 5 to View Study Sessions\n" +
+    //         "\tType 6 to View Study Sessions COUNT by Month\n" +
+    //         "\tType 7 to View Study Sessions GRADES by Month\n" +
+    //         "\tType 8 to Add Fake Data\n" +
+    //         "\tType 9 to Add Fake Study Sessions\n" +
+    //         "--------------------------------------------------\n");
+    // }
+
     public void MainMenu()
     {
         Console.Clear();
-        Console.WriteLine(
-            "--------------------------------------------------\n" +
-            "\n\t\tMAIN MENU\n\n" +
-            "\tWhat would you like to do?\n\n" +
-            "\tType 0 to Close Application\n" +
-            "\tType 1 to Study Flashcards\n" +
-            "\tType 2 to Create a New Flash Card\n" +
-            "\tType 3 to Create a New Stack\n" +
-            "\tType 4 to Delete a Stack\n" +
-            "\tType 5 to View Study Sessions\n" +
-            "\tType 6 to View Study Sessions COUNT by Month\n" +
-            "\tType 7 to View Study Sessions GRADES by Month\n" +
-            "\tType 8 to Add Fake Data\n" +
-            "\tType 9 to Add Fake Study Sessions\n" +
-            "--------------------------------------------------\n");
+        var menuBuilder = new System.Text.StringBuilder();
+
+        menuBuilder.AppendLine("--------------------------------------------------")
+                   .AppendLine()
+                   .AppendLine("\t\tMAIN MENU")
+                   .AppendLine()
+                   .AppendLine("\tWhat would you like to do?")
+                   .AppendLine()
+                   .AppendLine("\tType 0 to Close Application")
+                   .AppendLine("\tType 1 to Study Flashcards")
+                   .AppendLine("\tType 2 to Create a New Flash Card")
+                   .AppendLine("\tType 3 to Create a New Stack")
+                   .AppendLine("\tType 4 to Delete a Stack")
+                   .AppendLine("\tType 5 to View Study Sessions")
+                   .AppendLine("\tType 6 to View Study Sessions COUNT by Month")
+                   .AppendLine("\tType 7 to View Study Sessions GRADES by Month")
+                   .AppendLine("\tType 8 to Add Fake Data")
+                   .AppendLine("\tType 9 to Add Fake Study Sessions")
+                   .AppendLine("--------------------------------------------------");
+
+        Console.WriteLine(menuBuilder.ToString());
     }
+
 
     public void ShowStackNames(List<Stack> stackData)
     {

@@ -8,11 +8,11 @@ public class FlashCardController
     private readonly UserInput _userInput;
     private readonly DataManager _dataManager;
 
-    public FlashCardController(DisplayData displayData, UserInput userInput, DataManager useDB)
+    public FlashCardController(DisplayData displayData, UserInput userInput, DataManager dataManager)
     {
         _displayData = displayData;
         _userInput = userInput;
-        _dataManager = useDB;
+        _dataManager = dataManager;
     }
 
     public void InitializeDatabase()

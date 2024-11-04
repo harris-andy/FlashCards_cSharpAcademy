@@ -6,8 +6,8 @@ internal class Program
     {
         UserInput userInput = new UserInput();
         DisplayData displayData = new DisplayData();
-        UseDB useDB = new UseDB();
-        FlashCardController controller = new FlashCardController(displayData, userInput, useDB);
+        DataManager dataManager = new DataManager();
+        FlashCardController controller = new FlashCardController(displayData, userInput, dataManager);
 
         controller.InitializeDatabase();
         controller.ShowMainMenu();

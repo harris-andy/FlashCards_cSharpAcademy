@@ -4,3 +4,16 @@ junk.cs
 Class_Objects/StudyReportCounts.cs
 Class_Objects/StudyReportGrades.cs
 docker-compose.yml
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
