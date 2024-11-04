@@ -4,7 +4,7 @@ using Flashcards.harris_andy.Classes;
 
 namespace Flashcards.harris_andy;
 
-public class UseDB
+public class DataManager
 {
     public void InitializeDatabase()
     {
